@@ -1,0 +1,9 @@
+html[data-theme-base="platform"] {
+  --wailf-font-family-ui: 'Noto Sans', system-ui, sans-serif;
+}
+html[data-platform='linux'] .titlebar {
+  height: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+

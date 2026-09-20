@@ -1,0 +1,572 @@
+{
+  "app": {
+    "name": "Wailf",
+    "subtitle": "Security workbench",
+    "noScope": "No authorized scope",
+    "search": "Search features…",
+    "navigation": "FEATURES",
+    "tasks": "Tasks",
+    "taskDescription": "View progress, results and cancellation status",
+    "notifications": "Notifications",
+    "notificationDescription": "Interface notifications from this session",
+    "settings": "Settings",
+    "local": "Local application",
+    "unavailable": "Business services unavailable",
+    "collapse": "Collapse sidebar",
+    "expand": "Expand sidebar",
+    "menu": "Open navigation",
+    "noSearch": "No matching features",
+    "scope": "Authorized scope",
+    "serviceStatus": "Service status",
+    "footerHint": "Active operations require a valid target scope",
+    "scopeDescription": "Manage global target scopes",
+    "platformCard": "Runtime platform",
+    "platformActions": "Toggle bottom actions"
+  },
+  "common": {
+    "close": "Close",
+    "clear": "Clear",
+    "cancel": "Cancel",
+    "save": "Save",
+    "add": "Add",
+    "remove": "Delete",
+    "rename": "Rename",
+    "up": "Move up",
+    "down": "Move down",
+    "import": "Import JSON",
+    "export": "Export JSON",
+    "reset": "Restore defaults",
+    "search": "Search",
+    "visible": "Visible",
+    "hidden": "Hidden",
+    "moveTo": "Move to group",
+    "name": "Name",
+    "back": "Back",
+    "all": "All",
+    "selected": "Current",
+    "planned": "Planned",
+    "designing": "In design",
+    "version": "Version",
+    "optional": "Optional",
+    "confirmRemove": "Confirm deletion",
+    "loading": "Loading…"
+  },
+  "state": {
+    "unavailable": {
+      "title": "Service not connected",
+      "description": "Real data will appear here once the business service is connected."
+    },
+    "empty": {
+      "title": "No records yet",
+      "description": "New records will appear here."
+    },
+    "loading": {
+      "title": "Loading",
+      "description": "Fetching the latest data. Please wait."
+    },
+    "error": {
+      "title": "Unable to load",
+      "description": "Please try again later."
+    },
+    "context": {
+      "title": "Choose a job",
+      "description": "Choose a related job to inspect its results."
+    }
+  },
+  "planned": {
+    "eyebrow": "FEATURE ROADMAP",
+    "title": "This feature is planned",
+    "description": "This entry is part of the workbench navigation. Configure and use it here when it becomes available.",
+    "status": "Current stage",
+    "tags": "Use cases",
+    "back": "Open port scan",
+    "layout": "Manage navigation",
+    "note": "You can hide, reorder or move this feature to another group in Settings."
+  },
+  "settings": {
+    "eyebrow": "WORKBENCH PREFERENCES",
+    "title": "Settings",
+    "description": "Make this workbench your own. Preferences are saved on this device.",
+    "general": "General",
+    "appearance": "Appearance",
+    "layout": "Navigation",
+    "language": "Interface language",
+    "languageHint": "Changes apply immediately across the workbench.",
+    "sidebar": "Sidebar width",
+    "sidebarHint": "Choose a comfortable width. Narrow windows use a navigation drawer.",
+    "collapsed": "Collapse sidebar",
+    "collapsedHint": "Keep navigation and platform actions accessible.",
+    "storage": "Local preferences",
+    "storageHint": "Only language, theme and navigation are saved, never business results or credentials.",
+    "runtime": "Desktop runtime",
+    "runtimeHint": "Frontend runtime matches the Go and CLI version.",
+    "theme": "Theme",
+    "themeHint": "System fonts, platform styling and colors that follow your system appearance.",
+    "platformTheme": "Platform default",
+    "followsSystem": "Follows system appearance",
+    "customThemes": "Custom themes",
+    "noThemes": "No custom themes yet",
+    "themeImportHint": "Import a theme JSON file, then select it from the list. Importing keeps your current theme.",
+    "platform": "Current platform",
+    "themeUnavailable": "Some theme settings are unavailable. A usable appearance has been preserved.",
+    "deleteTheme": "Delete theme",
+    "deleteThemeHint": "Deleting the current theme restores the platform default.",
+    "themeImported": "Themes imported. Select one from the list to apply it.",
+    "themeImportFailed": "Theme import failed. Check the file version, content and duplicate IDs.",
+    "themeExportFailed": "Unable to export themes right now.",
+    "themeApplied": "Theme applied.",
+    "themeDeleted": "Theme deleted.",
+    "themeWriteFailed": "Unable to save the theme. The previous valid selection was preserved.",
+    "layoutName": "Layout name",
+    "defaultLayout": "Default layout",
+    "newLayout": "New layout",
+    "layoutHint": "Group, reorder and hide features to organize your workflow.",
+    "layoutSelect": "Current layout",
+    "layoutExportHint": "Exports contain navigation settings only, never business data.",
+    "newGroup": "New group",
+    "groupName": "Group name",
+    "noGroups": "No groups yet. Add a group to begin.",
+    "noItems": "No features in this group yet.",
+    "unknownFeature": "Unknown feature: {id}",
+    "unknownHint": "Unknown imported features are preserved and will appear when available.",
+    "hiddenItems": "{count} hidden",
+    "featureCount": "{count} features",
+    "renameLayout": "Rename layout",
+    "deleteLayout": "Delete current layout",
+    "deleteLayoutHint": "This only deletes the interface layout.",
+    "restoreHint": "Groups, ordering and visibility in the current layout will return to product defaults.",
+    "restoreConfirm": "Confirm restore",
+    "layoutSaved": "Navigation layout updated.",
+    "layoutImported": "Navigation layout imported.",
+    "layoutImportFailed": "Layout import failed. Check the version, duplicate entries and field formats.",
+    "layoutWriteFailed": "Unable to save the layout. The previous settings were preserved.",
+    "layoutRestored": "Current layout restored to defaults.",
+    "preferenceFailed": "Preferences could not be saved. This change was not persisted.",
+    "fileReadFailed": "Unable to read the file. Choose a valid JSON file.",
+    "diagnostics": "Diagnostics",
+    "lightPreview": "A clear, organized workbench",
+    "previewCaption": "Platform styling · Follows system appearance",
+    "editingGroup": "Edit group",
+    "deleteGroupHint": "Features will be kept in Unassigned when their group is deleted.",
+    "layoutDeleteLast": "Keep at least one layout.",
+    "layoutNewDefault": "My layout",
+    "groupNewDefault": "New group",
+    "preview": "Appearance preview",
+    "preferenceSaved": "Interface preferences updated.",
+    "fileExported": "Export requested. Check your download location.",
+    "fileTooLarge": "The file is too large. Choose a JSON file within the size limit.",
+    "languageChinese": "简体中文",
+    "languageEnglish": "English"
+  },
+  "notifications": {
+    "hint": "These are interface notifications. Business auditing is provided by a separate service.",
+    "count": "{count} notifications",
+    "empty": "No notifications",
+    "emptyDescription": "Feedback from theme and layout actions will appear here."
+  },
+  "platform": {
+    "windows": "Windows",
+    "darwin": "macOS",
+    "linux": "Linux",
+    "android": "Android",
+    "ios": "iOS",
+    "web": "Browser",
+    "unknown": "Unknown platform"
+  },
+  "error": {
+    "generic": "The operation could not be completed. Please try again.",
+    "service": {
+      "unavailable": "Service not connected."
+    }
+  },
+  "nav": {
+    "group": {
+      "recon": "Reconnaissance",
+      "asset": "Fingerprinting & assets",
+      "vuln": "Vulnerability validation",
+      "auth": "Authentication assessment",
+      "exploit": "Exploitation assessment",
+      "post": "Post-exploitation assessment",
+      "c2": "C2 & persistence",
+      "webshell": "WebShell & sessions",
+      "cloud": "Cloud & containers",
+      "toolbox": "Toolbox",
+      "forensics": "Forensics & response",
+      "intel": "Threat intelligence",
+      "unassigned": "Unassigned",
+      "custom": "Custom group"
+    }
+  },
+  "screen": {
+    "portscan": {
+      "title": "Port scan",
+      "description": "Configure port scans for authorized targets and review jobs and asset results."
+    },
+    "service-identification": {
+      "title": "Service identification",
+      "description": "Identify service types, protocols and versions on authorized assets."
+    },
+    "subdomain": {
+      "title": "Subdomain discovery",
+      "description": "Discover and organize subdomains within the target scope."
+    },
+    "dns-whois": {
+      "title": "DNS / Whois",
+      "description": "Review domain resolution, registration and related records."
+    },
+    "liveness": {
+      "title": "Liveness discovery",
+      "description": "Review reachability and liveness of authorized targets."
+    },
+    "osint": {
+      "title": "Open-source intelligence",
+      "description": "Collect publicly available target information with source references."
+    },
+    "web-fingerprint": {
+      "title": "Web fingerprinting",
+      "description": "Identify web technology stacks and link them to assets."
+    },
+    "component-fingerprint": {
+      "title": "Component fingerprinting",
+      "description": "Record component and service versions with identification evidence."
+    },
+    "cms-identification": {
+      "title": "CMS identification",
+      "description": "Identify content management systems and their public characteristics."
+    },
+    "asset-dedup": {
+      "title": "Asset consolidation",
+      "description": "Normalize asset identities, merge duplicates and preserve sources."
+    },
+    "poc-scan": {
+      "title": "POC validation",
+      "description": "Organize vulnerability validation and findings within authorized scope."
+    },
+    "nuclei": {
+      "title": "Nuclei connector",
+      "description": "Connect an external Nuclei runner and archive validation results."
+    },
+    "afrog": {
+      "title": "Afrog connector",
+      "description": "Connect an external Afrog runner and link jobs to findings."
+    },
+    "xray": {
+      "title": "Xray connector",
+      "description": "Connect an external Xray runner and review assessment results."
+    },
+    "directory-scan": {
+      "title": "Directory discovery",
+      "description": "Assess web paths and exposed surfaces within authorized scope."
+    },
+    "unauthorized-check": {
+      "title": "Access control checks",
+      "description": "Check for missing access controls and record verification evidence."
+    },
+    "weak-credential": {
+      "title": "Weak credential assessment",
+      "description": "Manage authorized authentication strength checks and risk records."
+    },
+    "hash-analysis": {
+      "title": "Hash analysis",
+      "description": "Analyze hash formats, algorithms and authentication material risks."
+    },
+    "kerberos-audit": {
+      "title": "Kerberos audit",
+      "description": "Assess Kerberos authentication configuration and risk evidence."
+    },
+    "jwt-session": {
+      "title": "JWT / session analysis",
+      "description": "Analyze token and session structures and security properties."
+    },
+    "exploit-connector": {
+      "title": "Exploit framework connector",
+      "description": "Connect external validation frameworks with authorization checks and auditing."
+    },
+    "web-validation": {
+      "title": "Web validation",
+      "description": "Manage authorized web risk validation and evidence."
+    },
+    "local-privesc": {
+      "title": "Local privilege assessment",
+      "description": "Assess host privilege configuration and local elevation risks."
+    },
+    "container-escape": {
+      "title": "Container isolation validation",
+      "description": "Assess isolation boundaries and risks in authorized container environments."
+    },
+    "internal-scan": {
+      "title": "Internal network discovery",
+      "description": "Review assets and reachability within authorized internal networks."
+    },
+    "lateral-assessment": {
+      "title": "Lateral movement assessment",
+      "description": "Analyze internal trust paths and lateral movement risks."
+    },
+    "ad-assessment": {
+      "title": "Active Directory assessment",
+      "description": "Assess directory service configuration, permissions and risks."
+    },
+    "credential-risk": {
+      "title": "Credential risk analysis",
+      "description": "Review credential exposure and privilege risks using references for sensitive values."
+    },
+    "c2-connector": {
+      "title": "C2 connectors",
+      "description": "Manage external C2 connector configuration and connection state."
+    },
+    "agent-state": {
+      "title": "Agent status",
+      "description": "Review agent metadata and state supplied by external connectors."
+    },
+    "channel-state": {
+      "title": "Channel status",
+      "description": "Review session channel capabilities, availability and connection state."
+    },
+    "persistence-review": {
+      "title": "Persistence review",
+      "description": "Record persistence risks and audit evidence in authorized environments."
+    },
+    "webshell-connector": {
+      "title": "WebShell connectors",
+      "description": "Manage external WebShell connectors and session metadata."
+    },
+    "session-terminal": {
+      "title": "Session terminal",
+      "description": "Provide session views for external connectors that declare terminal support."
+    },
+    "session-files": {
+      "title": "Session files",
+      "description": "Review authorized file channels supplied by external connectors."
+    },
+    "cloud-discovery": {
+      "title": "Cloud asset discovery",
+      "description": "Collect cloud assets and their global records."
+    },
+    "credential-leak": {
+      "title": "Cloud credential exposure",
+      "description": "Review cloud credential exposure indicators and store redacted summaries."
+    },
+    "cloud-audit": {
+      "title": "Cloud configuration audit",
+      "description": "Assess cloud resource configuration and access control risks."
+    },
+    "k8s-security": {
+      "title": "Kubernetes security",
+      "description": "Assess cluster, workload and permission configuration."
+    },
+    "codec": {
+      "title": "Encode / decode",
+      "description": "Provide local text and data encoding and decoding tools."
+    },
+    "crypto": {
+      "title": "Cryptography",
+      "description": "Provide local encryption, decryption and algorithm parameter inspection."
+    },
+    "guomi": {
+      "title": "Chinese cryptography",
+      "description": "Provide local tools for Chinese cryptographic algorithms."
+    },
+    "hash-jwt": {
+      "title": "Hash / JWT tools",
+      "description": "Provide hash computation and token structure inspection."
+    },
+    "format-convert": {
+      "title": "Format conversion",
+      "description": "Convert between common text and structured data formats."
+    },
+    "proxy-tunnel": {
+      "title": "Proxies & tunnels",
+      "description": "Manage proxy and tunnel configuration for authorized connections."
+    },
+    "text-tools": {
+      "title": "Text tools",
+      "description": "Provide text comparison, cleanup and local analysis tools."
+    },
+    "log-analysis": {
+      "title": "Log analysis",
+      "description": "Search and analyze archived logs and related events."
+    },
+    "memory-forensics": {
+      "title": "Memory forensics",
+      "description": "Organize memory forensic artifacts and analysis records."
+    },
+    "pcap-analysis": {
+      "title": "Packet capture analysis",
+      "description": "Analyze archived network traffic and protocol evidence."
+    },
+    "incident-response": {
+      "title": "Incident response",
+      "description": "Organize incident response, evidence and remediation records."
+    },
+    "ioc-query": {
+      "title": "IOC lookup",
+      "description": "Look up threat indicators with source and time references."
+    },
+    "intel-aggregation": {
+      "title": "Intelligence aggregation",
+      "description": "Link intelligence from multiple sources to local asset context."
+    }
+  },
+  "business": {
+    "action": {
+      "retry": "Retry",
+      "refresh": "Refresh",
+      "export": "Export",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "state": {
+      "unavailable": "Service not connected",
+      "unavailableDescription": "Connect the business service to query and save data.",
+      "context": "Choose a job",
+      "contextDescription": "Choose a related job to inspect its results.",
+      "loading": "Loading",
+      "loadingDescription": "Fetching the latest data.",
+      "empty": "No records yet",
+      "emptyDescription": "No records match the current query.",
+      "error": "Unable to load",
+      "errorDescription": "The request could not be completed. Please try again.",
+      "requestId": "Request ID: {id}"
+    },
+    "scan": {
+      "eyebrow": "Reconnaissance / Network discovery",
+      "title": "Port scan",
+      "subtitle": "Discover host ports and services within an authorized scope, with traceable results.",
+      "risk": "L2 · Active discovery",
+      "unavailableNote": "Prepare targets and confirmation details now. Once connected, choose a scan profile and Connector to submit a job.",
+      "targets": "Scan targets",
+      "targetHint": "Enter target expressions or reference existing assets.",
+      "manual": "Target input",
+      "existing": "Existing assets",
+      "expressions": "Hosts, domains, or CIDRs",
+      "targetPlaceholder": "Enter one target per line",
+      "targetFormat": "Separate targets with new lines or commas. The service validates targets against the selected scope.",
+      "assetIds": "Asset IDs",
+      "assetPlaceholder": "Enter one existing asset ID per line",
+      "assetHint": "Reference existing global assets; the service validates their eligibility.",
+      "draft": "Draft kept for this session only",
+      "configuration": "Scan configuration",
+      "configHint": "Use capabilities and profiles supplied by the service.",
+      "connector": "Connector",
+      "chooseConnector": "Choose an available Connector",
+      "profile": "Scan profile",
+      "chooseProfile": "Choose a scan profile",
+      "connectorVersion": "Connector version {version}",
+      "confirmation": "Authorization confirmation",
+      "confirmationHint": "Each scan is linked to a target scope and a confirmation reason.",
+      "reason": "Reason for this operation",
+      "reasonPlaceholder": "Assessment purpose or ticket reference",
+      "noAuthorization": "Select a target scope to view authorization details",
+      "confirmLabel": "I confirm these targets are within the selected authorized scope and agree to run the selected scan profile.",
+      "start": "Submit scan job",
+      "submitting": "Submitting…",
+      "scopeRequired": "Select a currently valid target scope.",
+      "connectorRequired": "Select a healthy, available Connector.",
+      "completeForm": "Enter targets, choose a scan profile, and confirm authorization.",
+      "ready": "The service will validate the request again.",
+      "submitted": "Job submitted. Status and results are queried from the service.",
+      "relatedJob": "Related job",
+      "chooseJob": "Choose a job to view results"
+    },
+    "connectorStatus": {
+      "healthy": "Healthy",
+      "unhealthy": "Unavailable",
+      "unknown": "Unchecked"
+    },
+    "jobStatus": {
+      "queued": "Queued",
+      "running": "Running",
+      "succeeded": "Succeeded",
+      "failed": "Failed",
+      "cancelled": "Cancelled",
+      "interrupted": "Interrupted"
+    },
+    "artifactStatus": {
+      "writing": "Writing",
+      "available": "Available",
+      "expired": "Expired",
+      "deleted": "Deleted",
+      "quarantined": "Quarantined"
+    },
+    "jobs": {
+      "eyebrow": "Task center",
+      "description": "View global task progress and status. Cancellation is confirmed by the service.",
+      "filterStatus": "Job status",
+      "allStatuses": "All statuses",
+      "sort": "Sort by creation time",
+      "newest": "Newest first",
+      "oldest": "Oldest first",
+      "total": "{count} jobs",
+      "indeterminate": "Waiting for a progress snapshot",
+      "progress": "Progress {value}%",
+      "details": "Job details",
+      "cancel": "Cancel job",
+      "cancelling": "Requesting cancellation…",
+      "cancelRequested": "Cancellation requested. The job status has been refreshed.",
+      "back": "Back to port scan",
+      "snapshot": "Job status",
+      "type": "Domain / Type",
+      "updated": "Updated at",
+      "interruptedHint": "The process stopped unexpectedly and cleanup is not confirmed. This job will not retry automatically."
+    },
+    "results": {
+      "title": "Scan results",
+      "description": "Inspect assets, services, artifacts, and audit entries for the selected job.",
+      "assets": "Assets",
+      "services": "Services",
+      "artifacts": "Artifacts",
+      "audit": "Audit",
+      "selectJob": "Choose a related job to view its results.",
+      "target": "Target",
+      "kind": "Type",
+      "source": "Source",
+      "tags": "Tags",
+      "lastSeen": "Last seen",
+      "port": "Port",
+      "protocol": "Protocol",
+      "service": "Service",
+      "observed": "Observed at",
+      "name": "Name",
+      "mediaType": "Media type",
+      "size": "Size",
+      "status": "Status",
+      "hash": "Hash",
+      "created": "Created at",
+      "actions": "Actions",
+      "actor": "Actor",
+      "entry": "Entry",
+      "action": "Action",
+      "outcome": "Result",
+      "correlation": "Request ID",
+      "total": "{count} records",
+      "page": "Page {page}",
+      "noSnapshot": "No result snapshot yet",
+      "exportAssets": "Export assets",
+      "exported": "Export completed."
+    },
+    "scope": {
+      "scope": "Target scope",
+      "noScope": "No scope selected",
+      "manage": "Manage target scopes",
+      "description": "Target scopes define permitted targets, operations and validity. Business records can be queried globally.",
+      "chooseScope": "Choose a target scope",
+      "newScope": "New target scope",
+      "name": "Name",
+      "scopeName": "Target scope name",
+      "saveScope": "Save target scope",
+      "expressions": "Target expressions",
+      "authorization": "Authorization",
+      "authorizationPlaceholder": "Authorization details or ticket reference",
+      "validFrom": "Valid from",
+      "expires": "Expires at",
+      "riskLevel": "Allowed risk level",
+      "operations": "Allowed operations",
+      "timeHint": "Enter local times. They are converted to UTC when saved.",
+      "scopeHint": "Separate operation categories with commas. The service validates targets and operation levels.",
+      "scopeRequirements": "Enter a name, targets, authorization, operations and valid dates.",
+      "draftHint": "Form drafts are kept for this session only.",
+      "unavailableHint": "Saving is unavailable until the service is connected. You can prepare a draft, which is kept for this session only.",
+      "invalidDraft": "Enter a name, targets, authorization, allowed operations, and valid start and end times."
+    }
+  }
+}

@@ -1,0 +1,174 @@
+/* A single reset is maintained in public/style.css; no Tailwind preflight. */
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+@import 'tw-animate-css';
+@custom-variant data-open (&[data-state="open"]);
+@custom-variant data-closed (&[data-state="closed"]);
+@custom-variant dark (&:is(.dark *));
+@theme inline {
+  --font-sans: var(--wailf-font-family-ui);
+  --radius-sm: var(--wailf-layout-radius-sm);
+  --radius-md: var(--wailf-layout-radius-md);
+  --radius-lg: var(--wailf-layout-radius-md);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+@layer base {
+  [data-slot] { border: 0 solid var(--border); }
+  button[data-slot] { background-color: transparent; }
+  ul[data-slot] { list-style: none; margin: 0; padding: 0; }
+}
+html:root {
+  --surface-canvas: var(--wailf-color-canvas);
+  --surface-default: var(--wailf-color-surface-default);
+  --surface-elevated: var(--wailf-color-surface-elevated);
+  --surface-glass: var(--wailf-color-surface-glass);
+  --background: var(--surface-canvas);
+  --foreground: var(--wailf-color-text-primary);
+  --card: var(--surface-default);
+  --card-foreground: var(--foreground);
+  --popover: var(--surface-elevated);
+  --popover-foreground: var(--foreground);
+  --primary: var(--wailf-color-action-primary);
+  --primary-foreground: var(--wailf-color-canvas);
+  --secondary: var(--wailf-color-action-secondary);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--surface-glass);
+  --muted-foreground: var(--wailf-color-text-muted);
+  --accent: var(--wailf-color-action-secondary);
+  --accent-foreground: var(--foreground);
+  --destructive: var(--wailf-color-status-danger);
+  --border: var(--wailf-color-border-subtle);
+  --input: var(--border);
+  --ring: var(--wailf-color-focus-ring);
+  --sidebar: var(--surface-canvas);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+  --el-bg-color: var(--surface-default);
+  --el-bg-color-page: var(--surface-canvas);
+  --el-bg-color-overlay: var(--surface-elevated);
+  --el-text-color-primary: var(--foreground);
+  --el-text-color-regular: var(--foreground);
+  --el-text-color-secondary: var(--muted-foreground);
+  --el-text-color-placeholder: var(--muted-foreground);
+  --el-text-color-disabled: color-mix(in srgb, var(--foreground) 45%, transparent);
+  --el-border-color: var(--border);
+  --el-border-color-light: color-mix(in srgb, var(--border) 85%, transparent);
+  --el-border-color-lighter: color-mix(in srgb, var(--border) 65%, transparent);
+  --el-border-color-extra-light: color-mix(in srgb, var(--border) 40%, transparent);
+  --el-border-color-dark: var(--border);
+  --el-border-color-darker: var(--border);
+  --el-fill-color: var(--surface-glass);
+  --el-fill-color-light: var(--surface-glass);
+  --el-fill-color-lighter: var(--surface-canvas);
+  --el-fill-color-extra-light: var(--surface-canvas);
+  --el-fill-color-dark: var(--surface-glass);
+  --el-fill-color-darker: var(--surface-glass);
+  --el-fill-color-blank: var(--surface-default);
+  --el-mask-color: color-mix(in srgb, var(--wailf-color-canvas) 70%, transparent);
+  --el-border-radius-base: var(--wailf-layout-radius-sm);
+  --el-border-radius-small: var(--wailf-layout-radius-sm);
+  --el-font-family: var(--wailf-font-family-ui);
+  --el-font-size-base: 13px;
+  --el-font-size-small: 12px;
+  --el-disabled-bg-color: var(--surface-glass);
+  --el-color-white: var(--wailf-color-surface-default);
+  --el-color-black: var(--wailf-color-text-primary);
+  --el-color-primary: var(--wailf-color-action-primary);
+  --el-color-primary-light-3: color-mix(in srgb, var(--el-color-primary) 70%, var(--surface-default));
+  --el-color-primary-light-5: color-mix(in srgb, var(--el-color-primary) 50%, var(--surface-default));
+  --el-color-primary-light-7: color-mix(in srgb, var(--el-color-primary) 30%, var(--surface-default));
+  --el-color-primary-light-8: color-mix(in srgb, var(--el-color-primary) 20%, var(--surface-default));
+  --el-color-primary-light-9: color-mix(in srgb, var(--el-color-primary) 10%, var(--surface-default));
+  --el-color-primary-dark-2: color-mix(in srgb, var(--el-color-primary) 80%, var(--foreground));
+  --el-color-success: var(--wailf-color-status-success);
+  --el-color-success-light-3: color-mix(in srgb, var(--el-color-success) 70%, var(--surface-default));
+  --el-color-success-light-5: color-mix(in srgb, var(--el-color-success) 50%, var(--surface-default));
+  --el-color-success-light-7: color-mix(in srgb, var(--el-color-success) 30%, var(--surface-default));
+  --el-color-success-light-8: color-mix(in srgb, var(--el-color-success) 20%, var(--surface-default));
+  --el-color-success-light-9: color-mix(in srgb, var(--el-color-success) 10%, var(--surface-default));
+  --el-color-success-dark-2: color-mix(in srgb, var(--el-color-success) 80%, var(--foreground));
+  --el-color-danger: var(--wailf-color-status-danger);
+  --el-color-danger-light-3: color-mix(in srgb, var(--el-color-danger) 70%, var(--surface-default));
+  --el-color-danger-light-5: color-mix(in srgb, var(--el-color-danger) 50%, var(--surface-default));
+  --el-color-danger-light-7: color-mix(in srgb, var(--el-color-danger) 30%, var(--surface-default));
+  --el-color-danger-light-8: color-mix(in srgb, var(--el-color-danger) 20%, var(--surface-default));
+  --el-color-danger-light-9: color-mix(in srgb, var(--el-color-danger) 10%, var(--surface-default));
+  --el-color-danger-dark-2: color-mix(in srgb, var(--el-color-danger) 80%, var(--foreground));
+  --el-color-error: var(--wailf-color-status-danger);
+  --el-color-error-light-3: color-mix(in srgb, var(--el-color-error) 70%, var(--surface-default));
+  --el-color-error-light-5: color-mix(in srgb, var(--el-color-error) 50%, var(--surface-default));
+  --el-color-error-light-7: color-mix(in srgb, var(--el-color-error) 30%, var(--surface-default));
+  --el-color-error-light-8: color-mix(in srgb, var(--el-color-error) 20%, var(--surface-default));
+  --el-color-error-light-9: color-mix(in srgb, var(--el-color-error) 10%, var(--surface-default));
+  --el-color-error-dark-2: color-mix(in srgb, var(--el-color-error) 80%, var(--foreground));
+  --el-color-warning: var(--wailf-color-status-warning);
+  --el-color-warning-light-3: color-mix(in srgb, var(--el-color-warning) 70%, var(--surface-default));
+  --el-color-warning-light-5: color-mix(in srgb, var(--el-color-warning) 50%, var(--surface-default));
+  --el-color-warning-light-7: color-mix(in srgb, var(--el-color-warning) 30%, var(--surface-default));
+  --el-color-warning-light-8: color-mix(in srgb, var(--el-color-warning) 20%, var(--surface-default));
+  --el-color-warning-light-9: color-mix(in srgb, var(--el-color-warning) 10%, var(--surface-default));
+  --el-color-warning-dark-2: color-mix(in srgb, var(--el-color-warning) 80%, var(--foreground));
+  --el-color-info: var(--wailf-color-text-muted);
+  --el-color-info-light-3: color-mix(in srgb, var(--el-color-info) 70%, var(--surface-default));
+  --el-color-info-light-5: color-mix(in srgb, var(--el-color-info) 50%, var(--surface-default));
+  --el-color-info-light-7: color-mix(in srgb, var(--el-color-info) 30%, var(--surface-default));
+  --el-color-info-light-8: color-mix(in srgb, var(--el-color-info) 20%, var(--surface-default));
+  --el-color-info-light-9: color-mix(in srgb, var(--el-color-info) 10%, var(--surface-default));
+  --el-color-info-dark-2: color-mix(in srgb, var(--el-color-info) 80%, var(--foreground));
+}
+/* Material belongs to the platform, including when a user theme has base=default. */
+html[data-material='acrylic'] {
+  --surface-canvas: color-mix(in srgb, var(--wailf-color-canvas) 26%, transparent);
+  --surface-default: color-mix(in srgb, var(--wailf-color-surface-default) 62%, transparent);
+  --surface-elevated: color-mix(in srgb, var(--wailf-color-surface-elevated) 94%, transparent);
+  --surface-glass: color-mix(in srgb, var(--wailf-color-surface-glass) 42%, transparent);
+}
+html[data-root-background='transparent'],
+html[data-root-background='transparent'] body,
+html[data-root-background='transparent'] #app,
+html[data-root-background='transparent'] .app-shell,
+html[data-root-background='transparent'] .workbench-layout,
+html[data-root-background='transparent'] .main-area { background: transparent; }
+html[data-root-background='transparent'] .main-toolbar,
+html[data-root-background='transparent'] .main-statusbar { background: var(--surface-canvas); }
+[data-slot='sheet-overlay'] { background: color-mix(in srgb, var(--wailf-color-text-primary) 16%, transparent); }
+.business-sheet { width: min(560px, 100vw); max-width: 560px; gap: 0; padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) 0; }
+.business-sheet .overlay-header { display: flex; flex-direction: column; gap: 5px; padding: 24px 50px 20px 24px; }
+@media (forced-colors: active) {
+  html[data-material='acrylic'] { --surface-canvas: Canvas; --surface-default: Canvas; --surface-elevated: Canvas; --surface-glass: Canvas; --foreground: CanvasText; --border: ButtonBorder; }
+  html[data-root-background='transparent'], html[data-root-background='transparent'] .main-area { background: Canvas; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

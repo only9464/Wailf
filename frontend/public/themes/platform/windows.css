@@ -1,0 +1,11 @@
+html[data-theme-base="platform"] {
+  --wailf-font-family-ui: 'Segoe UI', system-ui, sans-serif;
+  --wailf-layout-radius-sm: 4px;
+  --wailf-layout-radius-md: 6px;
+}
+html[data-platform='windows'] .titlebar {
+  height: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=My Product
+Comment=A wailf application
+# The Exec line includes %u to pass the URL to the application
+Exec=/usr/local/bin/wailf.exe %u
+Terminal=false
+Type=Application
+Icon=wailf.exe
+Categories=Utility;
+StartupWMClass=wailf.exe
+
+ 

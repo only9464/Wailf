@@ -1,0 +1,13 @@
+html[data-theme-base="platform"] {
+  --wailf-font-family-ui: -apple-system, BlinkMacSystemFont, sans-serif;
+  --wailf-layout-radius-sm: 6px;
+  --wailf-layout-radius-md: 10px;
+}
+html[data-platform='darwin'] .titlebar {
+  height: 50px;
+  --wails-draggable: drag;
+}
+html[data-platform='darwin'] .titlebar button {
+  --wails-draggable: no-drag;
+}
+

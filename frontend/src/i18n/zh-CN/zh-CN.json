@@ -1,0 +1,572 @@
+{
+  "app": {
+    "name": "Wailf",
+    "subtitle": "安全工作台",
+    "noScope": "未选择授权范围",
+    "search": "搜索功能…",
+    "navigation": "功能导航",
+    "tasks": "任务中心",
+    "taskDescription": "查看任务进度、结果与取消状态",
+    "notifications": "通知记录",
+    "notificationDescription": "本次运行中的界面通知",
+    "settings": "设置",
+    "local": "本地应用",
+    "unavailable": "业务服务待接入",
+    "collapse": "收起侧栏",
+    "expand": "展开侧栏",
+    "menu": "打开导航",
+    "noSearch": "没有匹配的功能",
+    "scope": "授权范围",
+    "serviceStatus": "服务状态",
+    "footerHint": "主动操作需有效授权范围",
+    "scopeDescription": "管理全局授权目标范围",
+    "platformCard": "运行平台",
+    "platformActions": "切换底部操作"
+  },
+  "common": {
+    "close": "关闭",
+    "clear": "清空",
+    "cancel": "取消",
+    "save": "保存",
+    "add": "添加",
+    "remove": "删除",
+    "rename": "重命名",
+    "up": "上移",
+    "down": "下移",
+    "import": "导入 JSON",
+    "export": "导出 JSON",
+    "reset": "恢复默认",
+    "search": "搜索",
+    "visible": "显示",
+    "hidden": "隐藏",
+    "moveTo": "移至分组",
+    "name": "名称",
+    "back": "返回",
+    "all": "全部",
+    "selected": "当前",
+    "planned": "规划中",
+    "designing": "设计中",
+    "version": "版本",
+    "optional": "可选",
+    "confirmRemove": "确认删除",
+    "loading": "正在加载…"
+  },
+  "state": {
+    "unavailable": {
+      "title": "服务尚未接入",
+      "description": "业务服务接入后，这里将显示真实数据。"
+    },
+    "empty": {
+      "title": "暂无记录",
+      "description": "记录生成后会显示在这里。"
+    },
+    "loading": {
+      "title": "正在加载",
+      "description": "正在获取最新数据，请稍候。"
+    },
+    "error": {
+      "title": "暂时无法加载",
+      "description": "请稍后重试。"
+    },
+    "context": {
+      "title": "请选择任务",
+      "description": "选择关联任务以查看结果。"
+    }
+  },
+  "planned": {
+    "eyebrow": "能力规划",
+    "title": "此功能正在规划中",
+    "description": "该入口已纳入工作台导航。功能开放后，你可以在这里配置并开展工作。",
+    "status": "当前阶段",
+    "tags": "适用场景",
+    "back": "前往端口扫描",
+    "layout": "管理导航布局",
+    "note": "导航入口可以在设置中隐藏、排序或移动到其他分组。"
+  },
+  "settings": {
+    "eyebrow": "工作台偏好",
+    "title": "设置",
+    "description": "让工作台适合你的工作方式。偏好仅保存在此设备。",
+    "general": "常规",
+    "appearance": "外观",
+    "layout": "导航布局",
+    "language": "界面语言",
+    "languageHint": "切换后立即应用于整个工作台。",
+    "sidebar": "侧栏宽度",
+    "sidebarHint": "选择舒适的导航宽度，窄窗口自动使用抽屉导航。",
+    "collapsed": "默认收起侧栏",
+    "collapsedHint": "保留功能导航与平台操作入口。",
+    "storage": "本地偏好",
+    "storageHint": "仅保存语言、主题与导航布局，不包含业务结果和凭据。",
+    "runtime": "桌面运行时",
+    "runtimeHint": "前端运行时与 Go / CLI 使用相同版本。",
+    "theme": "主题",
+    "themeHint": "系统字体、平台控件风格和随系统切换的明暗配色。",
+    "platformTheme": "平台默认",
+    "followsSystem": "跟随系统明暗",
+    "customThemes": "自定义主题",
+    "noThemes": "还没有自定义主题",
+    "themeImportHint": "导入主题 JSON 后可在列表中选择。导入不会改变当前主题。",
+    "platform": "当前平台",
+    "themeUnavailable": "部分主题设置暂时不可用，已保留可用外观。",
+    "deleteTheme": "删除主题",
+    "deleteThemeHint": "删除当前主题时将恢复平台默认。",
+    "themeImported": "主题已导入，请在列表中选择。",
+    "themeImportFailed": "主题导入失败，请检查文件版本、内容或重复 ID。",
+    "themeExportFailed": "暂时无法导出主题。",
+    "themeApplied": "主题已应用。",
+    "themeDeleted": "主题已删除。",
+    "themeWriteFailed": "无法保存主题，已保留上一个有效设置。",
+    "layoutName": "布局名称",
+    "defaultLayout": "默认布局",
+    "newLayout": "新建布局",
+    "layoutHint": "对功能进行分组、排序和隐藏，建立自己的工作流。",
+    "layoutSelect": "当前布局",
+    "layoutExportHint": "导出仅包含导航布局，不包含业务数据。",
+    "newGroup": "新建分组",
+    "groupName": "分组名称",
+    "noGroups": "暂无分组，请添加分组。",
+    "noItems": "此分组尚未添加功能。",
+    "unknownFeature": "未知功能：{id}",
+    "unknownHint": "保留导入配置中的未知功能，功能可用后自动显示。",
+    "hiddenItems": "已隐藏 {count} 项",
+    "featureCount": "{count} 个功能",
+    "renameLayout": "重命名布局",
+    "deleteLayout": "删除当前布局",
+    "deleteLayoutHint": "此操作仅删除界面布局。",
+    "restoreHint": "当前布局的分组、顺序和显隐将恢复为产品默认。",
+    "restoreConfirm": "确认恢复",
+    "layoutSaved": "导航布局已更新。",
+    "layoutImported": "导航布局已导入。",
+    "layoutImportFailed": "布局导入失败，请检查版本、重复项及字段格式。",
+    "layoutWriteFailed": "无法保存布局，已保留原有设置。",
+    "layoutRestored": "当前布局已恢复默认。",
+    "preferenceFailed": "偏好无法保存，本次修改未持久化。",
+    "fileReadFailed": "无法读取文件，请选择有效的 JSON 文件。",
+    "diagnostics": "诊断信息",
+    "lightPreview": "清晰、有序的工作台",
+    "previewCaption": "系统原生风格 · 随系统切换明暗",
+    "editingGroup": "编辑分组",
+    "deleteGroupHint": "删除分组后，功能会保留在未分配区域。",
+    "layoutDeleteLast": "至少保留一套布局。",
+    "layoutNewDefault": "我的布局",
+    "groupNewDefault": "新分组",
+    "preview": "外观预览",
+    "preferenceSaved": "界面偏好已更新。",
+    "fileExported": "已请求导出文件，请检查下载位置。",
+    "fileTooLarge": "文件过大，请选择符合大小限制的 JSON。",
+    "languageChinese": "简体中文",
+    "languageEnglish": "English"
+  },
+  "notifications": {
+    "hint": "这里只记录界面通知，业务审计由独立服务提供。",
+    "count": "{count} 条通知",
+    "empty": "暂无通知",
+    "emptyDescription": "布局、主题等操作的反馈会显示在这里。"
+  },
+  "platform": {
+    "windows": "Windows",
+    "darwin": "macOS",
+    "linux": "Linux",
+    "android": "Android",
+    "ios": "iOS",
+    "web": "浏览器",
+    "unknown": "未知平台"
+  },
+  "error": {
+    "generic": "操作暂时无法完成，请重试。",
+    "service": {
+      "unavailable": "服务尚未接入。"
+    }
+  },
+  "nav": {
+    "group": {
+      "recon": "侦察与信息收集",
+      "asset": "指纹与资产测绘",
+      "vuln": "漏洞发现与验证",
+      "auth": "口令与认证攻击",
+      "exploit": "利用与权限提升",
+      "post": "后渗透与横向移动",
+      "c2": "C2 与权限维持",
+      "webshell": "WebShell 与会话管理",
+      "cloud": "云与容器",
+      "toolbox": "工具箱",
+      "forensics": "取证与响应",
+      "intel": "威胁情报",
+      "unassigned": "未分配",
+      "custom": "自定义分组"
+    }
+  },
+  "screen": {
+    "portscan": {
+      "title": "端口扫描",
+      "description": "管理授权目标的端口扫描配置、任务与资产结果。"
+    },
+    "service-identification": {
+      "title": "服务识别",
+      "description": "识别授权资产的服务类型、协议与版本信息。"
+    },
+    "subdomain": {
+      "title": "子域发现",
+      "description": "整理目标范围内的子域发现与关联记录。"
+    },
+    "dns-whois": {
+      "title": "DNS / Whois",
+      "description": "查询域名解析、注册信息与历史关联。"
+    },
+    "liveness": {
+      "title": "存活探测",
+      "description": "汇总授权目标的可达性与存活状态。"
+    },
+    "osint": {
+      "title": "公开情报收集",
+      "description": "归集公开来源的目标信息并保留来源。"
+    },
+    "web-fingerprint": {
+      "title": "Web 指纹",
+      "description": "识别 Web 资产技术栈并关联资产记录。"
+    },
+    "component-fingerprint": {
+      "title": "组件与服务指纹",
+      "description": "记录组件、服务版本与识别依据。"
+    },
+    "cms-identification": {
+      "title": "CMS 识别",
+      "description": "识别内容管理系统及其公开特征。"
+    },
+    "asset-dedup": {
+      "title": "资产聚合去重",
+      "description": "归一化资产标识、合并重复记录并保留来源。"
+    },
+    "poc-scan": {
+      "title": "POC 验证",
+      "description": "编排授权范围内的漏洞验证与发现记录。"
+    },
+    "nuclei": {
+      "title": "Nuclei 联动",
+      "description": "连接外部 Nuclei 执行器并归档验证结果。"
+    },
+    "afrog": {
+      "title": "Afrog 联动",
+      "description": "连接外部 Afrog 执行器并关联任务与发现。"
+    },
+    "xray": {
+      "title": "Xray 联动",
+      "description": "连接外部 Xray 执行器并汇总检查结果。"
+    },
+    "directory-scan": {
+      "title": "目录扫描",
+      "description": "在授权范围内检查 Web 路径与暴露面。"
+    },
+    "unauthorized-check": {
+      "title": "未授权访问检测",
+      "description": "检查访问控制缺失并记录验证依据。"
+    },
+    "weak-credential": {
+      "title": "弱口令评估",
+      "description": "管理已授权的认证强度检查与风险记录。"
+    },
+    "hash-analysis": {
+      "title": "哈希分析",
+      "description": "分析哈希格式、算法与认证材料风险。"
+    },
+    "kerberos-audit": {
+      "title": "Kerberos 审计",
+      "description": "检查 Kerberos 认证配置与风险证据。"
+    },
+    "jwt-session": {
+      "title": "JWT / Session 分析",
+      "description": "分析令牌与会话机制的结构和安全属性。"
+    },
+    "exploit-connector": {
+      "title": "Exploit 框架连接器",
+      "description": "接入外部验证框架，管理授权检查与审计。"
+    },
+    "web-validation": {
+      "title": "Web 利用验证",
+      "description": "管理经授权的 Web 风险验证与证据。"
+    },
+    "local-privesc": {
+      "title": "本地提权评估",
+      "description": "评估主机权限配置与本地提权风险。"
+    },
+    "container-escape": {
+      "title": "容器逃逸验证",
+      "description": "评估授权容器环境的隔离边界与风险。"
+    },
+    "internal-scan": {
+      "title": "内网扫描",
+      "description": "汇总授权内网目标的资产与可达性。"
+    },
+    "lateral-assessment": {
+      "title": "横向移动评估",
+      "description": "分析内部信任路径与横向移动风险。"
+    },
+    "ad-assessment": {
+      "title": "AD 安全评估",
+      "description": "评估目录服务配置、权限关系与风险。"
+    },
+    "credential-risk": {
+      "title": "凭证风险分析",
+      "description": "汇总凭证暴露与权限风险，敏感值仅使用引用。"
+    },
+    "c2-connector": {
+      "title": "C2 连接器",
+      "description": "管理外部 C2 连接器配置与连接状态。"
+    },
+    "agent-state": {
+      "title": "Agent 状态",
+      "description": "查看外部连接器提供的 Agent 元数据与状态。"
+    },
+    "channel-state": {
+      "title": "信道状态",
+      "description": "查看会话信道能力、可用性与连接状态。"
+    },
+    "persistence-review": {
+      "title": "持久化风险检查",
+      "description": "记录授权环境中的持久化风险与审计证据。"
+    },
+    "webshell-connector": {
+      "title": "WebShell 连接器",
+      "description": "管理外部 WebShell 连接器与会话元数据。"
+    },
+    "session-terminal": {
+      "title": "会话终端",
+      "description": "为声明终端能力的外部连接器提供会话视图。"
+    },
+    "session-files": {
+      "title": "会话文件",
+      "description": "查看外部连接器提供的授权文件通道。"
+    },
+    "cloud-discovery": {
+      "title": "云资产发现",
+      "description": "汇总云环境资产与所属全局记录。"
+    },
+    "credential-leak": {
+      "title": "AK / SK 泄露检查",
+      "description": "检查云凭证泄露线索并保存脱敏摘要。"
+    },
+    "cloud-audit": {
+      "title": "云配置审计",
+      "description": "评估云资源配置与访问控制风险。"
+    },
+    "k8s-security": {
+      "title": "Kubernetes 安全",
+      "description": "评估集群、工作负载与权限配置。"
+    },
+    "codec": {
+      "title": "编解码",
+      "description": "提供本地文本与数据编解码工具。"
+    },
+    "crypto": {
+      "title": "加解密",
+      "description": "提供本地加解密与算法参数检查。"
+    },
+    "guomi": {
+      "title": "国密工具",
+      "description": "提供国密算法相关的本地处理工具。"
+    },
+    "hash-jwt": {
+      "title": "哈希 / JWT 工具",
+      "description": "提供哈希计算与令牌结构检查。"
+    },
+    "format-convert": {
+      "title": "格式转换",
+      "description": "在常用文本与结构化数据格式之间转换。"
+    },
+    "proxy-tunnel": {
+      "title": "代理与隧道",
+      "description": "管理授权连接的代理与隧道配置。"
+    },
+    "text-tools": {
+      "title": "文本工具",
+      "description": "提供文本比较、整理与本地分析工具。"
+    },
+    "log-analysis": {
+      "title": "日志分析",
+      "description": "检索并分析归档日志与关联事件。"
+    },
+    "memory-forensics": {
+      "title": "内存取证",
+      "description": "组织内存取证产物与分析记录。"
+    },
+    "pcap-analysis": {
+      "title": "流量分析",
+      "description": "分析已归档网络流量与协议证据。"
+    },
+    "incident-response": {
+      "title": "应急响应",
+      "description": "组织事件响应过程、证据与处置记录。"
+    },
+    "ioc-query": {
+      "title": "IOC 查询",
+      "description": "查询威胁指标并保留情报来源与时间。"
+    },
+    "intel-aggregation": {
+      "title": "情报聚合",
+      "description": "关联多来源情报与本地资产上下文。"
+    }
+  },
+  "business": {
+    "action": {
+      "retry": "重试",
+      "refresh": "刷新",
+      "export": "导出",
+      "previous": "上一页",
+      "next": "下一页"
+    },
+    "state": {
+      "unavailable": "服务尚未接入",
+      "unavailableDescription": "连接业务服务后，即可查询和保存数据。",
+      "context": "请选择任务",
+      "contextDescription": "选择关联任务以查看结果。",
+      "loading": "正在加载",
+      "loadingDescription": "正在获取最新数据。",
+      "empty": "暂无记录",
+      "emptyDescription": "当前查询没有返回记录。",
+      "error": "加载失败",
+      "errorDescription": "无法完成请求，请稍后重试。",
+      "requestId": "关联 ID：{id}"
+    },
+    "scan": {
+      "eyebrow": "资产侦察 / 网络发现",
+      "title": "端口扫描",
+      "subtitle": "在授权范围内发现主机端口与服务，并保留可追溯的扫描结果。",
+      "risk": "L2 · 主动探测",
+      "unavailableNote": "你可以先准备目标和确认说明。接入业务服务后，可选择扫描配置与 Connector 并提交任务。",
+      "targets": "扫描目标",
+      "targetHint": "填写目标表达式或引用已有资产。",
+      "manual": "目标输入",
+      "existing": "已有资产",
+      "expressions": "主机、域名或 CIDR",
+      "targetPlaceholder": "每行输入一个目标",
+      "targetFormat": "支持换行或逗号分隔。提交后由服务校验目标与授权范围。",
+      "assetIds": "资产 ID",
+      "assetPlaceholder": "每行输入一个现有资产 ID",
+      "assetHint": "引用全局已有资产；有效性由服务校验。",
+      "draft": "草稿仅保留在本次运行中",
+      "configuration": "扫描配置",
+      "configHint": "使用业务服务提供的能力与配置。",
+      "connector": "Connector",
+      "chooseConnector": "选择可用 Connector",
+      "profile": "扫描方案",
+      "chooseProfile": "选择扫描方案",
+      "connectorVersion": "Connector 版本 {version}",
+      "confirmation": "授权确认",
+      "confirmationHint": "每次扫描都关联授权范围和确认说明。",
+      "reason": "本次操作说明",
+      "reasonPlaceholder": "填写评估目的或工单引用",
+      "noAuthorization": "选择授权范围后显示授权说明",
+      "confirmLabel": "我确认上述目标属于所选授权范围，并同意按选定方案进行探测。",
+      "start": "提交扫描任务",
+      "submitting": "正在提交…",
+      "scopeRequired": "请选择当前有效的授权范围。",
+      "connectorRequired": "请选择健康且可用的 Connector。",
+      "completeForm": "请填写目标，选择扫描方案并完成授权确认。",
+      "ready": "请求将由业务服务再次校验。",
+      "submitted": "任务已提交，状态与结果以服务查询为准。",
+      "relatedJob": "关联任务",
+      "chooseJob": "选择任务以查看结果"
+    },
+    "connectorStatus": {
+      "healthy": "正常",
+      "unhealthy": "不可用",
+      "unknown": "待检查"
+    },
+    "jobStatus": {
+      "queued": "排队中",
+      "running": "运行中",
+      "succeeded": "已完成",
+      "failed": "失败",
+      "cancelled": "已取消",
+      "interrupted": "已中断"
+    },
+    "artifactStatus": {
+      "writing": "写入中",
+      "available": "可用",
+      "expired": "已过期",
+      "deleted": "已删除",
+      "quarantined": "已隔离"
+    },
+    "jobs": {
+      "eyebrow": "任务中心",
+      "description": "查看全局任务进度与状态。取消结果以服务返回的状态为准。",
+      "filterStatus": "任务状态",
+      "allStatuses": "全部状态",
+      "sort": "创建时间排序",
+      "newest": "最新在前",
+      "oldest": "最早在前",
+      "total": "共 {count} 个任务",
+      "indeterminate": "等待进度快照",
+      "progress": "进度 {value}%",
+      "details": "任务详情",
+      "cancel": "取消任务",
+      "cancelling": "请求取消中…",
+      "cancelRequested": "取消请求已送达，已重新查询任务状态。",
+      "back": "返回端口扫描",
+      "snapshot": "任务状态",
+      "type": "领域 / 类型",
+      "updated": "更新时间",
+      "interruptedHint": "任务因进程异常而中断，尚未确认清理完成；不会自动重试。"
+    },
+    "results": {
+      "title": "扫描结果",
+      "description": "查看所选任务的资产、服务、原始产物与审计记录。",
+      "assets": "资产",
+      "services": "服务",
+      "artifacts": "产物",
+      "audit": "审计",
+      "selectJob": "选择一个关联任务后查看结果。",
+      "target": "目标",
+      "kind": "类型",
+      "source": "来源",
+      "tags": "标签",
+      "lastSeen": "最近发现",
+      "port": "端口",
+      "protocol": "协议",
+      "service": "服务",
+      "observed": "发现时间",
+      "name": "名称",
+      "mediaType": "媒体类型",
+      "size": "大小",
+      "status": "状态",
+      "hash": "哈希",
+      "created": "创建时间",
+      "actions": "操作",
+      "actor": "操作者",
+      "entry": "入口",
+      "action": "动作",
+      "outcome": "结果",
+      "correlation": "关联 ID",
+      "total": "共 {count} 条记录",
+      "page": "第 {page} 页",
+      "noSnapshot": "尚无结果快照",
+      "exportAssets": "导出资产",
+      "exported": "导出已完成。"
+    },
+    "scope": {
+      "scope": "授权范围",
+      "noScope": "未选择授权范围",
+      "manage": "管理授权范围",
+      "description": "授权范围声明可操作的目标、操作类别与有效期；业务数据全局可查询。",
+      "chooseScope": "选择授权范围",
+      "newScope": "新建授权范围",
+      "name": "名称",
+      "scopeName": "输入授权范围名称",
+      "saveScope": "保存授权范围",
+      "expressions": "目标表达式",
+      "authorization": "授权说明",
+      "authorizationPlaceholder": "填写授权说明或工单引用",
+      "validFrom": "生效时间",
+      "expires": "过期时间",
+      "riskLevel": "允许的风险等级",
+      "operations": "允许的操作类别",
+      "timeHint": "按本地时间填写，保存时转换为 UTC。",
+      "scopeHint": "操作类别以逗号分隔。目标范围和操作等级由业务服务最终校验。",
+      "scopeRequirements": "请填写名称、目标、授权说明、操作类别及有效时间。",
+      "draftHint": "表单草稿仅保留在本次运行中。",
+      "unavailableHint": "服务尚未接入，保存操作暂不可用。可以先填写草稿，草稿仅保留在本次运行中。",
+      "invalidDraft": "请填写名称、目标、授权说明和允许操作，并设置有效的起止时间。"
+    }
+  }
+}

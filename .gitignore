@@ -9,3 +9,7 @@ build/ios/xcode/overlay.json
 build/ios/xcode/gen/
 build/android/overlay.json
 build/android/gen/
+build/android/app/build
+build/android/build
+build/android/app/src/main/jniLibs
+build/android/.gradle

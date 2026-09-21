@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=wailf
+Exec=wailf
+Icon=wailf
+Categories=Development;
+Terminal=false
+Keywords=wails
+Version=1.0
+StartupNotify=false

@@ -4,7 +4,7 @@ import { gsap } from 'gsap'
 
 /**
  * Adapted from Vue Bits FadeContent (MIT + Commons Clause), kept local so the
- * workbench does not depend on a remote component registry at runtime.
+ * The application does not depend on a remote component registry at runtime.
  * Decorative only: reduced motion and animation failure leave content visible.
  */
 const props = withDefaults(defineProps<{ duration?: number; delay?: number }>(), {

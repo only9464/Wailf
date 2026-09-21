@@ -2,10 +2,10 @@
 import { effectScope, onActivated, onDeactivated, onMounted, onUnmounted, watch, type EffectScope } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { useJobsStore } from '../stores/jobs'
+import { useJobsStore } from '../../stores/jobs'
 import { ElButton, ElProgress } from 'element-plus'
-import QueryFeedback from '../components/business/QueryFeedback.vue'
-import ResultViews from '../components/business/ResultViews.vue'
+import QueryFeedback from '../../components/business/QueryFeedback.vue'
+import ResultViews from '../../components/business/ResultViews.vue'
 const route = useRoute()
 const { t, te } = useI18n()
 const jobs = useJobsStore()
@@ -100,8 +100,6 @@ onUnmounted(stopQueries)
             :indeterminate="jobs.detail.data.progress === null"
         /></label>
         <dl class="detail-grid">
-          <dt>{{ t('business.scope.scope') }}</dt>
-          <dd class="mono">{{ jobs.detail.data.targetScopeId }}</dd>
           <dt>{{ t('business.jobs.type') }}</dt>
           <dd>{{ jobs.detail.data.domain }} / {{ jobs.detail.data.type }}</dd>
           <dt>{{ t('business.results.created') }}</dt>

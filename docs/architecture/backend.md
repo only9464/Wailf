@@ -20,7 +20,7 @@ features/recon/
   commands.go              # 变更输入和结果
   jobs.go                  # 该领域的长任务定义
   ports.go                 # 外部扫描器或存储端口
-  service.go               # 用例编排和授权检查
+  service.go               # 用例编排和策略检查
   errors.go                # 稳定错误 code
 ```
 
@@ -30,7 +30,7 @@ features/recon/
 
 ### 3.1 Storage
 
-Storage 提供应用级全局 repository ports、事务、迁移和分页能力。资产、任务、产物和会话不接受必填项目参数；TargetScope 是独立授权记录，应用级策略约束所有入口，Scope 可进一步收紧。Scope 的撤销不级联删除历史。默认实现使用 SQLite；外部数据库实现必须满足同一端口契约，不能让领域代码依赖 SQL 方言或具体驱动。
+Storage 提供应用级全局 repository ports、事务、迁移和分页能力。资产、任务、产物和会话不接受必填项目参数；应用级策略约束入口行为，历史记录不因配置变化级联删除。默认实现使用 SQLite；外部数据库实现必须满足同一端口契约，不能让领域代码依赖 SQL 方言或具体驱动。
 
 ### 3.2 Job Runtime
 
@@ -42,7 +42,7 @@ Artifact Store 将大结果、日志、附件和导出文件写入文件系统�
 
 ### 3.4 Audit 与 Secrets
 
-Audit writer 记录 actor、入口、目标、动作、结果及 Scope/Job 等关联；Secrets adapter 只负责系统密钥库和 credential reference，不把密钥传进普通日志或持久化 DTO。
+Audit writer 记录 actor、入口、目标、动作、结果及 Job/Session 等关联；Secrets adapter 只负责系统密钥库和 credential reference，不把密钥传进普通日志或持久化 DTO。
 
 ## 4. 入口适配器
 
@@ -56,7 +56,7 @@ Cobra 命令负责参数解析、读取 stdin/文件、打印 JSON 或人类可�
 
 ### MCP
 
-MCP adapter 负责工具描述、结构化输入校验、工具分组、确认元数据和 JSON 结果。SDK 被隔离在该目录；本轮不锁定 SDK，不让领域包导入 MCP 类型。
+MCP adapter 负责工具描述、结构化输入校验、工具分组和 JSON 结果。SDK 被隔离在该目录；本轮不锁定 SDK，不让领域包导入 MCP 类型。
 
 ### HTTP
 
@@ -69,7 +69,7 @@ HTTP adapter 属于未来 server profile。它必须独立实现认证、TLS、�
 - 能力/协议版本和健康状态；
 - 输入校验、超时、取消和进程清理；
 - 将外部输出转换成领域观测或 Session 通道数据；
-- 不把原始凭据、命令行秘密或未授权目标写入普通日志；
+- 不把原始凭据、命令行秘密或未清洗目标写入普通日志；
 - 可替换的 fake connector，便于测试。
 
 Session connector 只统一生命周期、心跳、关闭、审计和可选通道声明。命令、文件、交互终端不是所有连接器都必须支持。
@@ -78,14 +78,14 @@ Session connector 只统一生命周期、心跳、关闭、审计和可选通�
 
 所有入口都使用稳定的机器可读错误 code；用户文案由前端或入口层根据 `messageKey` 翻译。错误至少包含是否可重试、关联 request/job ID 和安全 detail。
 
-取消分为“请求取消”和“强制终止”：前者允许连接器清理并将 Job 标记为 `cancelled`，后者必须记录原因并保留清理失败信息。日志采用结构化字段，默认脱敏目标凭据、Authorization header、cookie、token 和会话输出。
+取消分为“请求取消”和“强制终止”：前者允许连接器清理并将 Job 标记为 `cancelled`，后者必须记录原因并保留清理失败信息。日志采用结构化字段，默认脱敏凭据、敏感 header、cookie、token 和会话输出。
 
 ## 7. 不允许的后端形态
 
 - 全局 `Capability` 接口要求所有能力返回同一结构。
 - `Engine.Submit` 作为所有领域的唯一入口。
 - 用全局 Event bus 替代可靠的 Job、Session 和 Artifact 状态。
-- 入口层直接操作 repository，绕过 TargetScope 或审计。
+- 入口层直接操作 repository，绕过领域策略或审计。
 - 为了复用而让领域包导入 Wails、Cobra、MCP SDK 或 Vue 类型。
 - 把外部工具的原始输出当作稳定领域模型直接暴露给所有入口。
 

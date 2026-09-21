@@ -9,7 +9,7 @@
 
 不启动 Wails、数据库或真实外部工具，覆盖：
 
-- TargetScope 匹配、过期、风险等级和拒绝原因；
+- 目标输入、风险等级和拒绝原因；
 - Job 状态转移、取消、重试和 `interrupted` 处理；
 - Asset 归一化、去重和来源合并；
 - Session 生命周期和可选 SessionChannel；
@@ -23,7 +23,7 @@
 - 事务回滚、并发读取和分页；
 - Job/Artifact/Audit 的关联一致性；
 - Artifact 哈希、TTL、清理和恢复；
-- 全局资产去重、任务/产物直接查询、Scope 撤销后的历史可追溯性。
+- 全局资产去重、任务/产物直接查询、策略变化后的历史可追溯性。
 
 ### 1.3 Connector 合同测试
 
@@ -40,7 +40,7 @@
 - Wails DTO 与错误转换；
 - CLI JSON schema、stdout/stderr 和退出码；
 - MCP tool 输入限制、结构化输出和确认元数据；
-- 未来 HTTP 的认证、Origin、限流和版本路径。
+- 未来 HTTP 的身份、Origin、限流和版本路径。
 
 入口测试可以调用 fake 领域服务，但不能通过复制业务逻辑来“伪造成功”。
 
@@ -51,7 +51,7 @@
 - store 对重复/乱序 Job 通知的幂等性；
 - 每语言单一 JSON 路径、重复 key、双语叶子 key/插值一致性与 Element Plus locale 同步；
 - Wails adapter 的取消、错误和 DTO 映射；
-- 全局任务查询不需要项目，主动操作需有效 Scope；切换任务、筛选和 Scope 时旧响应不能覆盖；
+- 全局任务查询不需要项目；切换任务和筛选时旧响应不能覆盖；
 - 平台卡片默认收起、向上展开、重复切换、操作后收起、Escape 焦点恢复、移动导航和草稿保留；
 - Element Plus/shadcn-vue/Vue Bits token 一致性、popup 层级、键盘、深浅色和减少动画。
 
@@ -93,10 +93,10 @@ Windows Acrylic 需在构建后的原生窗口实际观察，记录系统版本�
 
 | 形态 | 构建/运行 | 用途 | 约束 |
 | --- | --- | --- | --- |
-| Desktop GUI | Wails build/package | 本地工作台 | 使用本地 SQLite、Artifact 目录和系统密钥库 |
+| Desktop GUI | Wails build/package | 本地界面 | 使用本地 SQLite、Artifact 目录和系统密钥库 |
 | CLI | 同一主二进制 `wailf cli` | 脚本、CI、批处理 | 不读取 GUI localStorage |
 | MCP | 同一主二进制 `wailf mcp` | 本机 AI 客户端 | 首期 stdio，工具集受控 |
-| Server | 现有 `server` build profile | 受控无 GUI 部署 | 认证/TLS/来源校验完成前不作为远程控制面 |
+| Server | 现有 `server` build profile | 受控无 GUI 部署 | TLS/来源校验完成前不作为远程控制面 |
 | Docker | `task build:docker` | 可重复的 server 镜像 | 明确数据卷、Artifact 目录和密钥注入方式 |
 | Mobile | Android/iOS Wails 工程 | 后续移动端体验 | 不假设桌面文件系统和系统密钥库完全相同 |
 

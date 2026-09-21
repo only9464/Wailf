@@ -4,7 +4,7 @@
 > 主题契约：`theme.v1`  运行时基线：Wails 3 `v3.0.0-beta.20`  
 > 适用范围：Wails GUI；CLI、MCP 和 HTTP server 不读取主题
 
-本文定义 GUI 主题、平台差异和启动时环境探测的边界。主题只影响界面呈现，不改变 TargetScope、Job、Artifact、Session 或任何入口协议的业务语义。本文是现行实现契约。当前前端已具备平台探测、主题级联、导入导出与故障恢复；本轮扩展 Windows Acrylic 和组件库语义变量映射，未来主题编辑器仍未实现。
+本文定义 GUI 主题、平台差异和启动时环境探测的边界。主题只影响界面呈现，不改变 Job、Artifact、Session 或任何入口协议的业务语义。本文是现行实现契约。当前前端已具备平台探测、主题级联、导入导出与故障恢复；本轮扩展 Windows Acrylic 和组件库语义变量映射，未来主题编辑器仍未实现。
 
 ## 1. 目标与不负责的内容
 
@@ -17,7 +17,7 @@
 
 主题层不负责：
 
-- 业务数据、权限、TargetScope、审计、凭据或入口输出；
+- 业务数据、策略、审计、凭据或入口输出；
 - 让 CLI、MCP、HTTP 返回与 GUI 相同的颜色或资源；
 - 执行用户提供的 CSS、JavaScript、HTML、字体或远程代码；
 - 通过 User-Agent 推断安全能力或改变平台策略。
@@ -416,12 +416,12 @@ accessibility.color-scheme
 
 ### 6.2 组件库 token 映射
 
-当前工作台已使用 Wailf 语义 token。加入组件库时，Element Plus 的 `--el-color-*`、背景、填充、文本、边框、圆角与字体变量，以及 shadcn-vue 的 background、foreground、card、popover、sidebar 等语义变量均由 Wailf token 映射。组件库样式是消费层，不是第四个可持久化主题层。
+当前界面已使用 Wailf 语义 token。加入组件库时，Element Plus 的 `--el-color-*`、背景、填充、文本、边框、圆角与字体变量，以及 shadcn-vue 的 background、foreground、card、popover、sidebar 等语义变量均由 Wailf token 映射。组件库样式是消费层，不是第四个可持久化主题层。
 
 - 业务表单、表格及 Select/Popover 等弹出内容与主区同步深浅色和用户 tint。
 - Tailwind 不加载与 Element Plus 冲突的第二套全局 reset；控件密度和焦点使用统一变量。
 - 动画遵循 `prefers-reduced-motion`，业务进度和状态不依赖装饰动画。
-- 历史欢迎页背景不再承担工作台主题；v1 用户主题仍不允许导入图片、远程 URL 或任意 CSS。
+- 历史欢迎页背景不再承担主界面主题；v1 用户主题仍不允许导入图片、远程 URL 或任意 CSS。
 
 ### 6.3 Windows 原生 Acrylic
 
@@ -523,13 +523,13 @@ import { System } from "@wailsio/runtime";
 | custom 定义损坏/缺失 | 已归一化 ID | `platform`（若可用）否则 `default` | 回退并可清理坏 custom key |
 | `localStorage` 不可用 | 已归一化 ID | `platform`（若可用）否则 `default` | 使用内存偏好，不写业务存储 |
 
-500ms 是启动查询的上限，不是资源下载的许可；资源也必须有独立短超时。所有错误只进入开发诊断/安全日志，不能把原始环境数据、路径或用户定义写入普通日志。
+500ms 是启动查询的上限，不是资源下载的时限；资源也必须有独立短超时。所有错误只进入开发诊断/安全日志，不能把原始环境数据、路径或用户定义写入普通日志。
 
 ## 9. 浏览器、SSR 与 server 边界
 
 | 场景 | 环境来源 | 主题行为 | 禁止事项 |
 | --- | --- | --- | --- |
-| Wails GUI | 锁定 runtime 的 `System.Environment` | 完整三层 cascade、平台资源和 hooks | 不把环境信息当业务授权 |
+| Wails GUI | 锁定 runtime 的 `System.Environment` | 完整三层 cascade、平台资源和 hooks | 不把环境信息当业务策略 |
 | Vite 浏览器开发/普通 WebView | DOM；可安全识别时为 `web` | default token，可读取 GUI localStorage | 不用 UA 作为安全事实，不请求 Wails API |
 | SSR/预渲染 | 无 DOM、无 localStorage | 纯函数输出 default 或调用方传入的已校验 token | import 时访问 `window`/`document`/`System.Environment` |
 | CLI | Go composition root | 不初始化主题 | 不读 GUI storage/资源 |
@@ -547,7 +547,7 @@ import { System } from "@wailsio/runtime";
 - 资源只接受静态 `PlatformResourceId` 或基础 CSS manifest ID，执行 allowlist、同源、MIME、大小和可选 hash 校验；不跟随外源重定向。
 - `id`、i18n key、版本和对象原型键（例如 `__proto__`、`constructor`）都必须显式拒绝或剥离。
 - 失败采用 fail-closed：丢弃有问题的层或资源，回退 default/platform，不部分应用未经校验的数据。
-- 主题不含凭据、TargetScope、扫描结果或任何秘密；导出/导入只处理 `ThemeBundle` 及其中的 `ThemeDefinition`，不接受其他业务数据。
+- 主题不含凭据、扫描结果或任何秘密；导出/导入只处理 `ThemeBundle` 及其中的 `ThemeDefinition`，不接受其他业务数据。
 - localStorage 是可被同源脚本读取的 GUI 偏好区，不能被当作秘密存储；CSP、依赖审计和 XSS 防护仍然适用。
 - 对定义大小、token 数、资源数量和加载时间设上限，避免恶意主题造成内存或启动 DoS。
 
@@ -564,7 +564,7 @@ import { System } from "@wailsio/runtime";
 1. 读取 `TokenRegistry` 元数据，渲染颜色、数值、枚举和资源选择控件；不提供 CSS/JS 文本框。
 2. 修改只作用于内存预览层；点击保存时生成 `ThemeDefinition v1`，先完整校验，再按“定义后指针”的顺序写入多键 storage。
 3. 导入文件按不可信输入处理，显示未知 token、被截断字段和迁移结果；不能静默执行或联网下载资源。
-4. 预览始终保留平台 hooks、键盘焦点、对比度、reduced-motion 和 forced-colors 约束；主题不能隐藏安全提示或授权状态。
+4. 预览始终保留平台 hooks、键盘焦点、对比度、reduced-motion 和 forced-colors 约束；主题不能隐藏安全提示或策略状态。
 5. 未来 schema 升级提供 `migrate(v1 -> v2)` 并保留导出版本；删除或重命名 token 时提供 registry alias 和用户提示。
 
 编辑器产生的定义只影响当前 GUI。它不会改变 CLI 输出、MCP 工具描述、HTTP 响应或后端审计内容。

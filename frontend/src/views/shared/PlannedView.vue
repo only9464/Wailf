@@ -2,9 +2,9 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { features } from '../features/registry'
-import UiIcon from '../components/UiIcon.vue'
-import FadeContent from '../components/effects/FadeContent.vue'
+import { features } from '../../features/registry'
+import UiIcon from '../../components/UiIcon.vue'
+import FadeContent from '../../components/effects/FadeContent.vue'
 const route = useRoute()
 const { t } = useI18n()
 const feature = computed(() => features.find((item) => item.route === route.path))

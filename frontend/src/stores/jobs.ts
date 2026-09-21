@@ -14,7 +14,6 @@ import type {
   ScanProfile,
   ServiceSummary,
 } from '../services/types'
-import { useScopeStore } from './scopes'
 type ResultKind = 'assets' | 'services' | 'artifacts' | 'audit'
 const newDraft = () => ({
   inputKind: 'text' as 'text' | 'assets',
@@ -22,11 +21,8 @@ const newDraft = () => ({
   assetIds: '',
   connectorId: '',
   profileId: '',
-  confirmed: false,
-  reason: '',
 })
 export const useJobsStore = defineStore('jobs', () => {
-  const scope = useScopeStore()
   const list = reactive(queryState(emptyPage<JobSummary>()))
   const detail = reactive(queryState<JobSummary | null>(null))
   const filters = reactive({
@@ -65,27 +61,13 @@ export const useJobsStore = defineStore('jobs', () => {
   const availableProfiles = computed(() =>
     profiles.data.items.filter((item) => activeConnector.value?.profileIds.includes(item.id)),
   )
-  function isScopeUsable() {
-    const value = scope.currentScope
-    return (
-      value?.status === 'active' &&
-      Date.parse(value.validFrom) <= Date.now() &&
-      Date.parse(value.expiresAt) > Date.now() &&
-      value.allowedOperations.includes('recon.portscan')
-    )
-  }
-  const scopeUsable = computed(isScopeUsable)
   const canSubmit = computed(
     () =>
       scanAvailable.value &&
-      scopeUsable.value &&
-      !!scope.scopeId &&
       activeConnector.value?.status === 'healthy' &&
       !!activeConnector.value.inputKinds.includes(scanDraft.inputKind) &&
       availableProfiles.value.some((item) => item.id === scanDraft.profileId) &&
       !!(scanDraft.inputKind === 'text' ? scanDraft.targets.trim() : scanDraft.assetIds.trim()) &&
-      scanDraft.confirmed &&
-      !!scanDraft.reason.trim() &&
       !submitting.value,
   )
   function noContext<T>(state: QueryState<T>, connected: boolean) {
@@ -223,7 +205,7 @@ export const useJobsStore = defineStore('jobs', () => {
     }
   }
   async function submitScan() {
-    if (!canSubmit.value || !isScopeUsable() || !scope.scopeId) return
+    if (!canSubmit.value) return
     const generation = contextGeneration,
       detailAt = detailGeneration,
       resultsAt = resultSelectionGeneration
@@ -237,15 +219,12 @@ export const useJobsStore = defineStore('jobs', () => {
           .map((x) => x.trim())
           .filter(Boolean)
       const job = await getServices().recon.start({
-        targetScopeId: scope.scopeId,
         targets: scanDraft.inputKind === 'text' ? split(scanDraft.targets) : [],
         assetIds: scanDraft.inputKind === 'assets' ? split(scanDraft.assetIds) : [],
         profileId: scanDraft.profileId,
         connectorId: scanDraft.connectorId,
-        confirmation: { confirmed: scanDraft.confirmed, reason: scanDraft.reason.trim() },
       })
       if (generation !== contextGeneration) return
-      scanDraft.confirmed = false
       feedback.value = 'business.scan.submitted'
       const unchanged = detailAt === detailGeneration && resultsAt === resultSelectionGeneration
       await Promise.all([refresh(), ...(unchanged ? [loadDetail(job.id), loadResults(job.id)] : [])])
@@ -285,33 +264,23 @@ export const useJobsStore = defineStore('jobs', () => {
   function initialize() {
     if (initialized) return
     initialized = true
-    scope.initialize()
     void refresh()
     void loadScanOptions()
     void loadResults('')
   }
   watch(
-    () => scope.scopeId,
-    () => {
-      ++contextGeneration
-      scanDraft.confirmed = false
-      commandError.value = null
-      feedback.value = ''
-    },
-    { flush: 'sync' },
-  )
-  watch(
     () => scanDraft.connectorId,
     () => {
       scanDraft.profileId = ''
-      scanDraft.confirmed = false
     },
     { flush: 'sync' },
   )
   watch(
-    () => [scanDraft.targets, scanDraft.assetIds, scanDraft.inputKind, scanDraft.profileId, scanDraft.reason],
+    () => [scanDraft.targets, scanDraft.assetIds, scanDraft.inputKind, scanDraft.profileId],
     () => {
-      scanDraft.confirmed = false
+      ++contextGeneration
+      commandError.value = null
+      feedback.value = ''
     },
     { flush: 'sync' },
   )
@@ -325,7 +294,6 @@ export const useJobsStore = defineStore('jobs', () => {
     profiles,
     availableProfiles,
     activeConnector,
-    scopeUsable,
     selectedJobId,
     results,
     cancelling,

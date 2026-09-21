@@ -13,7 +13,7 @@ Wailf 是一个本地优先的 Go 模块化单体：领域能力按垂直切片�
 
 ```mermaid
 flowchart LR
-    User[授权安全工作者]
+    User[安全工作者]
     GUI[Wails GUI]
     CLI[wailf cli]
     MCP[wailf mcp\nstdio]
@@ -64,7 +64,6 @@ internal/
     audit/                        # 审计写入和查询
     secrets/                      # 系统密钥库适配与 credential reference
   features/
-    scope/
     asset/
     recon/
     scan/
@@ -78,7 +77,7 @@ internal/
 frontend/src/                     # 具体前端目录遵循前端开发规范，不在此重复定义
 ```
 
-前端目录和组件规则唯一来源为[前端开发规范](../development/frontend-conventions.md)。采用本机单用户全局数据，Scope 独立授权，不是业务对象的隔离容器；详见[领域模型](domain-model-and-storage.md)。目录是边界提示，不要求每个小功能都创建一层空目录。只有拥有独立模型、流程或入口契约的领域才建立垂直切片。
+前端目录和组件规则唯一来源为[前端开发规范](../development/frontend-conventions.md)。采用本机单用户全局数据，业务对象不绑定项目上下文；详见[领域模型](domain-model-and-storage.md)。目录是边界提示，不要求每个小功能都创建一层空目录。只有拥有独立模型、流程或入口契约的领域才建立垂直切片。
 
 ## 5. 依赖方向
 
@@ -90,7 +89,7 @@ frontend/src/                     # 具体前端目录遵循前端开发规范�
 
 - `features/*` 不导入 Wails、Cobra、MCP SDK、HTTP handler 或 Vue 类型。
 - 领域可以依赖平台端口（例如 `JobStore`、`ArtifactStore`、`AuditWriter`），不能依赖某个具体 SQLite 或外部工具实现。
-- 入口适配器可以组合多个领域用例，但不能直接操作 repository 或绕过授权检查。
+- 入口适配器可以组合多个领域用例，但不能直接操作 repository 或绕过领域策略。
 - 领域之间不通过全局事件总线互相调用；跨领域协作使用明确的查询端口、命令结果或 Artifact 引用。
 - 运行时通知是入口适配器的传输细节，不是所有领域都必须实现的统一事件协议。
 
@@ -107,7 +106,7 @@ sequenceDiagram
     participant S as Storage Ports
     participant A as Audit
 
-    E->>U: 校验请求与 TargetScope
+    E->>U: 校验请求与领域策略
     U->>A: 记录创建动作
     U->>J: 创建并持久化 Job
     J->>C: 执行领域连接器

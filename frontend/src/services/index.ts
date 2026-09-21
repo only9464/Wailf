@@ -11,7 +11,6 @@ const unavailable = async (): Promise<never> => {
 }
 export function createUnavailableServices(): FrontendServices {
   return {
-    scopes: { available: false, list: unavailable, create: unavailable },
     jobs: { available: false, list: unavailable, get: unavailable, cancel: unavailable },
     recon: {
       available: false,

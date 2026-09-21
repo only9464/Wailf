@@ -9,11 +9,11 @@
 
 ## 1. 产品定位
 
-Wailf 是一个面向授权安全工作的综合安全操作平台，而不是单一扫描器。扫描、指纹和漏洞验证是首批能力域；平台长期还要承载会话、产物、取证、响应和威胁情报等持续工作流。
+Wailf 是一个面向安全工作的综合安全操作平台，而不是单一扫描器。扫描、指纹和漏洞验证是首批能力域；平台长期还要承载会话、产物、取证、响应和威胁情报等持续工作流。
 
 ### 1.1 目标
 
-- 在一个可配置的工作台内管理目标范围、资产、任务、产物和会话。
+- 在一个可配置的界面内管理目标、资产、任务、产物和会话。
 - 让 GUI、CLI 和 MCP 按各自适合的方式暴露能力，避免为了“统一”而牺牲入口体验。
 - 让新能力可以以独立领域切片加入，并复用存储、任务、审计和秘密管理等平台基础设施。
 - 默认支持离线和本地运行，并为未来的无 GUI server 模式和外部数据库保留边界。
@@ -24,13 +24,13 @@ Wailf 是一个面向授权安全工作的综合安全操作平台，而不是�
 - 首期不自研 C2 Agent、载荷生成器或 WebShell 植入方式。
 - 不把所有能力强行包装成一个通用 `Capability` 接口、统一 `Engine.Submit` 门面或全局事件流。
 - 不把 GUI 布局配置、扫描结果和大体积日志混存到同一个 localStorage 空间。
-- 不在产品文档中提供未授权攻击、绕过检测或载荷投递的操作步骤。
+- 不在产品文档中展开攻击载荷、绕过检测或植入步骤。
 
 ## 2. 用户与工作边界
 
-首期面向本机单用户，所有业务数据由应用全局管理。取消业务项目概念，不要求创建或选择数据容器，不设隐藏的默认项目。资产、任务、产物和会话可直接查询；未来多用户需要重新设计身份与访问策略，不能把 Scope 当作租户边界。
+首期面向本机单用户，所有业务数据由应用全局管理。取消业务项目概念，不要求创建或选择数据容器，不设隐藏的默认项目。资产、任务、产物和会话可直接查询；未来多用户需要重新设计身份与访问策略。
 
-每次涉及扫描、验证、连接或命令执行的工作都必须关联 `TargetScope`。TargetScope 记录目标表达式、授权说明、创建者、有效期和允许的操作等级。缺少有效范围时，入口只能执行查询、导入和本地分析等低风险操作。
+扫描、验证、连接和命令执行都直接使用目标与功能参数，页面不额外引入上下文容器。
 
 ## 3. 能力域地图
 
@@ -40,11 +40,11 @@ Wailf 是一个面向授权安全工作的综合安全操作平台，而不是�
 | --- | --- | --- | --- |
 | `recon` | 侦察与信息收集 | 端口扫描、服务识别、子域、DNS/Whois、存活探测、OSINT | `designing` |
 | `asset` | 指纹与资产测绘 | Web/服务指纹、CMS 识别、资产聚合去重 | `planned` |
-| `vuln` | 漏洞发现与验证 | POC、Nuclei/Afrog/Xray 联动、目录扫描、未授权检测 | `planned` |
+| `vuln` | 漏洞发现与验证 | POC、Nuclei/Afrog/Xray 联动、目录扫描、配置检测 | `planned` |
 | `auth` | 口令与认证攻击 | 弱口令、哈希、Kerberos、JWT/Session 分析 | `planned` |
-| `exploit` | 利用与权限提升 | 外部 Exploit 框架、本地提权、容器逃逸验证 | `planned` |
+| `exploit` | 利用与环境验证 | 外部 Exploit 框架、本地配置验证、容器安全检查 | `planned` |
 | `post` | 后渗透与横向移动 | 内网扫描、AD 评估、凭证风险分析 | `planned` |
-| `c2` | C2 与权限维持 | 外部 C2 连接器、Agent/信道状态、持久化风险 | `planned` |
+| `c2` | C2 与连接维持 | 外部 C2 连接器、Agent/信道状态、持久化风险 | `planned` |
 | `webshell` | WebShell 与会话管理 | 外部 WebShell 连接器、命令/文件/终端通道 | `planned` |
 | `cloud` | 云与容器 | 云资产、AK/SK 泄露、配置审计、K8s 安全 | `planned` |
 | `toolbox` | 工具箱 | 编解码、加解密、国密、哈希/JWT、格式转换、代理 | `planned` |
@@ -59,16 +59,16 @@ Wailf 是一个面向授权安全工作的综合安全操作平台，而不是�
 | --- | --- | --- | --- | --- | --- | --- |
 | `recon` | 侦察查询、扫描 Job、扫描器 Connector；不拥有通用 Job runtime | `recon` | `full` | `subset`（端口扫描） | `subset`（任务/摘要） | `future` |
 | `asset` | 资产归一化、指纹和去重；不拥有原始扫描器进程 | `asset` | `planned` | `planned` | `planned` | `future` |
-| `vuln` | 漏洞发现、验证记录和 finding 生命周期；不提供未授权利用载荷 | `vuln` | `planned` | `closed` | `closed` | `future` |
+| `vuln` | 漏洞发现、验证记录和 finding 生命周期；不提供攻击载荷 | `vuln` | `planned` | `closed` | `closed` | `future` |
 | `auth` | 认证材料分析和风险结果；不保存明文凭据 | `auth` | `planned` | `closed` | `closed` | `future` |
-| `exploit` | 外部验证 Connector 和授权检查；不自研或分发攻击载荷 | `exploit` | `planned` | `closed` | `closed` | `future` |
+| `exploit` | 外部验证 Connector 和结果归一化；不自研或分发攻击载荷 | `exploit` | `planned` | `closed` | `closed` | `future` |
 | `post` | 后渗透评估、横向风险和结果归档；不拥有 C2 Agent | `post` | `planned` | `closed` | `closed` | `future` |
 | `c2` | 外部 C2 Connector、Session 元数据和审计；不实现自研 Agent | `c2` | `planned` | `closed` | `closed` | `future` |
 | `webshell` | 外部 WebShell Connector、Session channel 和审计；不生成植入代码 | `webshell` | `planned` | `closed` | `closed` | `future` |
 | `cloud` | 云/Kubernetes 资产和配置审计；不持有长期云密钥 | `cloud` | `planned` | `planned` | `subset`（查询） | `future` |
 | `toolbox` | 本地编解码、格式转换和分析工具；不隐式改变业务数据 | `toolbox` | `planned` | `subset` | `subset`（无副作用查询） | `future` |
 | `forensics` | 日志、内存、pcap 和响应工作流；不绕过 Artifact 保留策略 | `forensics` | `planned` | `planned` | `subset`（查询） | `future` |
-| `intel` | IOC 查询和情报聚合；不把外部情报当作授权事实 | `intel` | `planned` | `subset` | `subset`（查询） | `future` |
+| `intel` | IOC 查询和情报聚合；保留来源和时间信息 | `intel` | `planned` | `subset` | `subset`（查询） | `future` |
 
 入口状态可以随单项能力变更，但必须同时更新本表、4.2 默认布局、[入口契约](../architecture/entry-contracts.md)的矩阵和对应 ADR；不能因为新增一个入口适配器就扩大领域 owner 的职责。
 
@@ -124,7 +124,7 @@ Wailf 是一个面向授权安全工作的综合安全操作平台，而不是�
       "id": "vuln",
       "name": "nav.group.vuln",
       "icon": "shield-alert",
-      "items": ["poc-scan", "nuclei", "afrog", "xray", "directory-scan", "unauthorized-check"]
+      "items": ["poc-scan", "nuclei", "afrog", "xray", "directory-scan", "access-control-check"]
     },
     {
       "id": "auth",
@@ -188,7 +188,7 @@ Wailf 是一个面向授权安全工作的综合安全操作平台，而不是�
 
 | 入口 | 首期定位 | 暴露原则 |
 | --- | --- | --- |
-| Wails GUI | 主工作台 | 负责可视化、交互式配置、任务和会话面板 |
+| Wails GUI | 主界面 | 负责可视化、交互式配置、任务和会话面板 |
 | `wailf cli` | 脚本与 CI | 只暴露适合批处理、管道和稳定退出码的子集 |
 | `wailf mcp` | AI Agent 适配 | 以任务级和查询级工具聚合，控制在 15 至 25 个工具 |
 | HTTP server | 未来部署形态 | 复用领域能力但独立处理认证、TLS、来源和并发 |
@@ -200,7 +200,7 @@ Wailf 是一个面向授权安全工作的综合安全操作平台，而不是�
 - 语言包目录与每语言单一 JSON 规则统一遵循[前端开发规范](../development/frontend-conventions.md)。
 - 所有 UI 文案、后端错误 key、POC/字典名称都走 i18n；禁止硬编码和句子拼接。
 - GUI 布局、主题、语言、侧边栏状态等使用封装后的 localStorage 模块。
-- 所选 Scope、目标输入和未提交表单只保留运行时草稿；已提交业务记录由后端全局持久化，敏感值只保存引用或脱敏摘要。
+- 目标输入和未提交表单只保留运行时草稿；已提交业务记录由后端全局持久化，敏感值只保存引用或脱敏摘要。
 - localStorage 只保存 GUI 专属偏好，不保存扫描结果、会话原始输出或凭据。
 
 ### 6.1 平台主题基线
@@ -213,14 +213,14 @@ Wailf 是一个面向授权安全工作的综合安全操作平台，而不是�
 
 ### 6.2 导航与 Windows 材质
 
-侧栏顶部仅保留搜索和导航控制；左下运行平台卡片默认收起任务、通知和设置，点击后在卡片上方向上展开。授权范围入口位于扫描页，全局任务面板无需先选范围。Windows 保留原生标题栏与按钮，使用全局 Acrylic；其他平台本轮只保留兼容能力。具体交互见[前端架构](../architecture/frontend.md)，材质见[ADR-0011](../adr/ADR-0011-windows-acrylic-material.md)。
+侧栏顶部仅保留搜索和导航控制；默认路由为 `/settings`，设置页是软件启动后的第一个页面。左下运行平台卡片默认收起任务和通知，点击后在卡片上方向上展开。Windows 保留原生标题栏与按钮，使用全局 Acrylic；其他平台本轮只保留兼容能力。具体交互见[前端架构](../architecture/frontend.md)，材质见[ADR-0011](../adr/ADR-0011-windows-acrylic-material.md)。
 
 ## 7. 运行、数据与安全基线
 
 - 本地默认使用 SQLite 保存元数据，文件系统保存大结果、日志和附件；外部数据库只通过存储端口接入。
 - 长操作默认 Job 化，支持状态、进度、取消、失败原因和 Artifact 引用。
 - Session 统一生命周期和心跳；命令、文件、交互终端是连接器声明的可选通道。
-- 凭据进入操作系统密钥库，数据库只保存引用；高风险操作需要授权范围、确认和审计。
+- 凭据进入操作系统密钥库，数据库只保存引用；高风险操作保留确认和审计记录。
 - C2/WebShell 首期只设计外部连接器，不设计自研 Agent 或植入载荷。
 
 ## 8. 决策状态索引
@@ -228,7 +228,7 @@ Wailf 是一个面向授权安全工作的综合安全操作平台，而不是�
 | 主题 | 状态 | 记录 |
 | --- | --- | --- |
 | 模块化单体与入口适配 | 已接受 | [ADR-0001](../adr/ADR-0001-模块化单体与入口适配.md) |
-| 全局数据、独立 TargetScope 与存储边界 | 已接受 | [ADR-0009](../adr/ADR-0009-global-application-data.md)，替代旧 ADR-0002 |
+| 应用级全局数据与存储边界 | 已接受 | [ADR-0009](../adr/ADR-0009-global-application-data.md) |
 | Job 默认异步、可取消和中断标记 | 已接受 | [ADR-0003](../adr/ADR-0003-Job异步语义.md) |
 | C2/WebShell 外部 Session Connector | 已接受 | [ADR-0004](../adr/ADR-0004-会话连接器边界.md) |
 | MCP 首期 stdio | 已接受 | [ADR-0005](../adr/ADR-0005-MCP传输与SDK待定.md) |
@@ -243,7 +243,7 @@ Wailf 是一个面向授权安全工作的综合安全操作平台，而不是�
 | 阶段 | 目标 | 验收信号 |
 | --- | --- | --- |
 | `0.1` 文档基线 | 需求、架构、契约、治理完整且无冲突 | 新贡献者可沿文档定位一次功能新增路径 |
-| `0.2` 平台骨架 | 全局数据、Scope、SQLite、Job、Artifact、审计、GUI Shell 和主题基底 | 可管理授权范围、查询全局任务，平台探测失败仍正常启动 |
+| `0.2` 平台骨架 | 全局数据、SQLite、Job、Artifact、审计、GUI Shell 和主题基底 | 可查询全局任务，平台探测失败仍正常启动 |
 | `0.3` 首个切片 | 资产侦察与端口扫描闭环 | GUI/CLI/MCP 各自完成约定子集 |
 | `0.4+` 能力扩展 | 指纹、漏洞、取证、情报和外部会话连接器 | 每个领域有独立契约和适配测试 |
 

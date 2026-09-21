@@ -13,7 +13,7 @@
 4. 若涉及 GUI 外观，先读[主题与平台适配](../architecture/theme-and-platform.md)；
 5. 对应的 ADR 和 [安全与治理](../security/governance.md)。
 
-当前仓库已有 Vue 工作台、端口扫描界面、布局和主题管理；Go 业务仍为示例 `GreetService`，默认业务适配器未接入。不要把示例 service 当作未来领域架构。本轮只调整前端和文档，Go 仅适配 Windows Acrylic。
+当前仓库已有 Vue 界面、端口扫描页面、布局和主题管理；Go 业务仍为示例 `GreetService`，默认业务适配器未接入。不要把示例 service 当作未来领域架构。本轮只调整前端和文档，Go 仅适配 Windows Acrylic。
 
 ## 2. 本地环境
 
@@ -42,10 +42,10 @@ task build:docker
 
 1. 在产品基线中登记领域 ID、目标用户、风险等级和默认导航项；
 2. 写领域边界：输入、输出、状态、外部依赖和不负责的内容；
-3. 定义全局数据的查询与去重规则、独立 TargetScope 授权条件和 Artifact/Audit 来源关联；
+3. 定义全局数据的查询与去重规则、风险策略和 Artifact/Audit 来源关联；
 4. 在 `internal/features/<domain>` 内设计模型、查询、命令、Job handler 和领域专属端口；
 5. 为需要的入口单独写 Wails、CLI、MCP 或 HTTP adapter；
-6. 为前端添加 feature route、注册元数据、store、i18n key 和页面；
+6. 为前端在 `frontend/src/views/<功能分类>/` 添加页面，再补 feature route、注册元数据、store 和 i18n key；
 7. 添加 fake connector、存储集成测试和入口契约测试；
 8. 更新文档导航、入口暴露矩阵和相关 ADR。
 
@@ -56,7 +56,7 @@ task build:docker
 Connector 提交前必须写清：
 
 - 支持的协议/工具版本和输入类型；
-- 允许的风险等级、Scope 要求和资源上限；
+- 允许的风险等级、策略要求和资源上限；
 - 超时、取消、重试和子进程清理；
 - 外部结果到领域模型的映射；
 - 凭据来源、日志脱敏和 Artifact 保留；
@@ -70,7 +70,7 @@ Connector 提交前必须写清：
 
 - 页面通过 feature adapter/store 访问后端，不直接调用生成 bindings。
 - 新文案先添加 i18n key，再写组件。
-- 导航分组只修改布局数据或默认配置，不在页面模板中复制 12 类树结构。
+- 导航分组只修改布局数据或默认配置；路由页面放在 `views/<功能分类>/`，不在页面模板中复制 12 类树结构。
 - localStorage 访问必须经过 `frontend/src/storage` 封装。
 - 主区页面与全局浮层保持边界；TaskPanel/LogPanel 不持有领域规则。
 - 主题由 `PlatformProvider`、`ThemeService` 和 `ThemeStorage` 负责，业务组件只消费语义 token 或 composable/hook，不直接探测操作系统或写平台选择器。
@@ -98,11 +98,11 @@ Connector 提交前必须写清：
 ## 7. 提交前检查
 
 - 文档链接、JSON/Mermaid 示例和术语检查通过；
-- 全局查询不依赖项目或 Scope，主动操作带有效 Scope、确认和审计说明；
+- 全局查询不依赖项目上下文，主动操作带风险提示、确认和审计说明；
 - 没有新增全局 Capability/Engine/Event 抽象；
 - 错误、取消、重启和部分失败路径有说明；
 - 新入口明确 stdout/stderr、退出码或工具 schema；
-- 测试使用 fake connector，不访问未经授权的真实目标。
+- 测试使用 fake connector，不访问真实目标。
 - 主题变更覆盖 token/hook 清单、GUI-only 边界、资源打包、runtime 锁定和平台回退测试。
 
 ## 8. 文档与 ADR

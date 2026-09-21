@@ -9,7 +9,7 @@ import { useLayoutStore } from '../stores/layout'
 import { useNotificationStore } from '../stores/notifications'
 import { themeState } from '../theme'
 import UiIcon from './UiIcon.vue'
-const emit = defineEmits<{ panel: [value: 'scope' | 'tasks' | 'notifications', trigger?: HTMLElement | null] }>()
+const emit = defineEmits<{ panel: [value: 'tasks' | 'notifications', trigger?: HTMLElement | null] }>()
 const { t, te } = useI18n()
 const { isMobile, state, setOpen, setOpenMobile, openMobile } = useSidebar()
 const platformCard = ref<HTMLButtonElement>()

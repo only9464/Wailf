@@ -374,17 +374,6 @@ small {
 .breadcrumb-divider {
   opacity: 0.5;
 }
-.scope-button {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 10px;
-  border: 0;
-  background: var(--surface-canvas);
-  color: var(--wailf-color-text-muted);
-  border-radius: var(--wailf-layout-radius-sm);
-  padding: 5px 8px;
-}
 .main-scroll {
   flex: 1;
   min-height: 0;
@@ -1018,28 +1007,6 @@ small {
 .file-input {
   display: none;
 }
-.context-strip {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  border: 1px solid var(--wailf-color-border-subtle);
-  border-radius: var(--wailf-layout-radius-md);
-  padding: 13px 17px;
-  background: var(--surface-canvas);
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-.context-strip > div {
-  flex: 1;
-  min-width: 140px;
-}
-.context-strip small,
-.context-strip .section-label {
-  display: block;
-  color: var(--wailf-color-text-muted);
-  font-size: 10px;
-  margin-bottom: 3px;
-}
 .service-note {
   margin-bottom: 22px;
 }
@@ -1047,9 +1014,6 @@ small {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: 20px;
-}
-.scan-confirmation {
-  grid-column: 1/-1;
 }
 .scan-form .card-content {
   display: flex;
@@ -1072,15 +1036,6 @@ small {
   font-size: 10px;
   color: var(--wailf-color-text-muted);
 }
-.check-label {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 12px;
-}
-.check-label input {
-  margin-top: 3px;
-}
 .submit-row {
   display: flex;
   align-items: center;
@@ -1091,18 +1046,6 @@ small {
 .submit-row p {
   font-size: 11px;
   max-width: 400px;
-}
-.scope-summary {
-  padding: 12px;
-  background: var(--surface-canvas);
-  border-radius: var(--wailf-layout-radius-sm);
-  font-size: 11px;
-}
-.scope-summary dt {
-  color: var(--wailf-color-text-muted);
-}
-.scope-summary dd {
-  margin: 0 0 7px;
 }
 .result-selector,
 .result-footer {
@@ -1139,7 +1082,6 @@ small {
 .job-card {
   padding: 17px;
 }
-.scope-panel,
 .task-panel {
   display: flex;
   flex-direction: column;
@@ -1210,14 +1152,6 @@ small {
   .breadcrumb > .ui-icon,
   .breadcrumb > span:not(.breadcrumb-divider) {
     display: none;
-  }
-  .scope-button {
-    max-width: 140px;
-  }
-  .scope-button span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
   .page {
     padding: 22px 16px 30px;
@@ -1303,10 +1237,6 @@ small {
 .job-card {
   padding: 0;
 }
-.scope-panel details > summary {
-  padding: 12px 16px;
-  cursor: pointer;
-}
 .results-card > .tabs {
   padding-inline: 20px;
   margin-bottom: 0;
@@ -1315,10 +1245,6 @@ small {
   padding: 12px 16px;
   border-top: 1px solid var(--wailf-color-border-subtle);
 }
-.context-strip > .toolbar {
-  justify-content: flex-start;
-}
-.portscan-view .context-strip,
 .portscan-view .service-note {
   margin-bottom: 0;
 }
@@ -1348,7 +1274,7 @@ select {
   min-height: calc(34px * var(--wailf-layout-density));
 }
 /* shadcn sidebar composition uses these semantic surfaces; layout remains Wailf-specific. */
-.workbench-layout { min-height: 0 !important; height: 100%; display: flex !important; width: 100%; background: var(--surface-canvas); }
+.app-layout { min-height: 0 !important; height: 100%; display: flex !important; width: 100%; background: var(--surface-canvas); }
 .native-sidebar [data-sidebar='sidebar-inner'] { background: var(--surface-canvas); border-right: 1px solid var(--wailf-color-border-subtle); }
 .native-sidebar [data-sidebar='header'] { padding: 14px 12px 8px; }
 .native-sidebar [data-sidebar='content'] { padding: 0 12px; }
@@ -1372,7 +1298,7 @@ select {
 /* Sidebar geometry is owned by the generated Sidebar; the shell is a flex column. */
 .app-shell { display: flex; flex-direction: column; }
 .titlebar { height: var(--wailf-titlebar-height); flex-shrink: 0; }
-.workbench-layout { flex: 1; min-height: 0; background: transparent; }
+.app-layout { flex: 1; min-height: 0; background: transparent; }
 .main-area { flex: 1; width: 0; }
 [data-slot='sidebar-container'] { top: calc(var(--wailf-titlebar-height) + env(safe-area-inset-top, 0px)); height: calc(100dvh - var(--wailf-titlebar-height) - env(safe-area-inset-top, 0px)); }
 .sidebar-top-controls .sidebar-search { flex: 1; min-width: 0; }
@@ -1390,7 +1316,6 @@ select {
 .el-checkbox { max-width: 100%; white-space: normal; height: auto; min-height:32px; }
 .el-checkbox__label { white-space: normal; }
 .el-select, .el-date-editor { max-width:100%; }
-.scope-panel .el-date-editor.el-input { width: 100%; }
 .scan-form .el-form-item { margin-bottom: 0; }
 .el-button + .el-button { margin-left:0; }
 @media (max-width:767px) { .main-area { width: 100%; } .mobile-menu { display:inline-flex; } }

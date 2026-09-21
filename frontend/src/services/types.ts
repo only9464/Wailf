@@ -27,20 +27,8 @@ export interface ListQuery {
   sort: string
   direction: 'asc' | 'desc'
 }
-export interface TargetScope {
-  id: string
-  name: string
-  expressions: string[]
-  authorization: string
-  validFrom: string
-  expiresAt: string
-  riskLevel: string
-  allowedOperations: string[]
-  status: 'active' | 'revoked'
-}
 export interface JobSummary {
   id: string
-  targetScopeId: string
   domain: string
   type: string
   status: JobStatus
@@ -99,22 +87,11 @@ export interface ScanProfile {
   name: string
   description: string
 }
-export interface ScopeInput {
-  name: string
-  expressions: string[]
-  authorization: string
-  validFrom: string
-  expiresAt: string
-  riskLevel: string
-  allowedOperations: string[]
-}
 export interface StartScanInput {
-  targetScopeId: string
   targets: string[]
   assetIds: string[]
   profileId: string
   connectorId: string
-  confirmation: { confirmed: boolean; reason: string }
 }
 export interface JobQuery extends ListQuery {
   status?: JobStatus
@@ -127,11 +104,6 @@ export interface QueryState<T> {
   status: QueryStatus
   data: T
   error: DomainError | null
-}
-export interface ScopeService {
-  available: boolean
-  list(query: ListQuery): Promise<Page<TargetScope>>
-  create(input: ScopeInput): Promise<TargetScope>
 }
 export interface JobService {
   available: boolean
@@ -152,7 +124,6 @@ export interface ReconService {
   exportAssets(query: ResultQuery): Promise<void>
 }
 export interface FrontendServices {
-  scopes: ScopeService
   jobs: JobService
   recon: ReconService
 }

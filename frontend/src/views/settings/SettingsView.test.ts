@@ -5,16 +5,16 @@ import { createPinia } from 'pinia'
 import { createMemoryHistory, createRouter } from 'vue-router'
 import { createI18n } from 'vue-i18n'
 import { ElSelect } from 'element-plus'
-import zh from '../i18n/zh-CN/zh-CN.json'
-import { useLayoutStore } from '../stores/layout'
-import { usePreferenceStore } from '../stores/preferences'
-import { defaultLayout } from '../features/registry'
-import { cloneLayout } from '../storage/layout'
-import * as browserStorage from '../storage/browser'
-import { selectTheme, themeState } from '../theme'
+import zh from '../../i18n/zh-CN/zh-CN.json'
+import { useLayoutStore } from '../../stores/layout'
+import { usePreferenceStore } from '../../stores/preferences'
+import { defaultLayout } from '../../features/registry'
+import { cloneLayout } from '../../storage/layout'
+import * as browserStorage from '../../storage/browser'
+import { selectTheme, themeState } from '../../theme'
 import SettingsView from './SettingsView.vue'
 
-vi.mock('../theme', async () => {
+vi.mock('../../theme', async () => {
   const { reactive } = await import('vue')
   return {
     themeState: reactive({

@@ -12,7 +12,7 @@ function restoreFocus(event: Event) {
 </script>
 <template>
   <Sheet :open="true" @update:open="value => { if (!value) emit('close') }">
-    <SheetContent class="business-sheet" @close-auto-focus="restoreFocus">
+    <SheetContent class="business-sheet" @close-auto-focus="restoreFocus" @escape-key-down="emit('close')">
       <SheetHeader class="overlay-header"><SheetTitle>{{ title }}</SheetTitle><SheetDescription v-if="description">{{ description }}</SheetDescription></SheetHeader>
       <div class="overlay-body"><slot /></div>
     </SheetContent>

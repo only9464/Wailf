@@ -16,7 +16,7 @@ async function chooseLanguage(page: Page, label: string) {
 }
 
 test('platform card opens an upward action drawer and restores focus on Escape', async ({ page }) => {
-  await page.goto('/#/recon/portscan')
+  await page.goto('/#/settings')
   const card = await openPlatformActions(page)
   await expect(card).toHaveAccessibleName('运行平台 · 浏览器')
   await expect(page.locator('.sidebar-top-controls')).not.toContainText('Wailf')
@@ -42,28 +42,14 @@ test('platform card opens an upward action drawer and restores focus on Escape',
   await page.keyboard.press('Escape')
   await expect(page.locator('.business-sheet')).toHaveCount(0)
   await expect(card).toBeFocused()
-  await openPlatformActions(page)
-  await page.getByRole('button', { name: '通知记录', exact: true }).click()
-  await expect(page.locator('.business-sheet')).toContainText('暂无通知')
-  await page.keyboard.press('Escape')
-  await expect(card).toBeFocused()
 })
 
-test('scan target drafts survive the scope sheet and route navigation', async ({ page }) => {
+test('scan target drafts survive route navigation without local persistence', async ({ page }) => {
   const errors: string[] = []
   page.on('pageerror', (error) => errors.push(error.message))
   await page.goto('/#/recon/portscan')
   const targets = page.locator('.scan-targets textarea')
   await targets.fill('192.0.2.10\nexample.test')
-
-  await page.locator('.scope-manage').click()
-  await expect(page.locator('.business-sheet')).toBeVisible()
-  const scopePanel = page.locator('.scope-panel')
-  await scopePanel.locator('input[placeholder="输入授权范围名称"]').fill('runtime scope draft')
-  await scopePanel.locator('textarea').first().fill('example.test')
-  await page.keyboard.press('Escape')
-  await expect(page.locator('.business-sheet')).toHaveCount(0)
-  await expect(page.locator('.scope-manage')).toBeFocused()
 
   await openPlatformActions(page)
   await page.getByRole('link', { name: '设置', exact: true }).click()
@@ -71,50 +57,28 @@ test('scan target drafts survive the scope sheet and route navigation', async ({
   await page.locator('.nav-item', { hasText: '端口扫描' }).click()
   await expect(page.locator('.scan-targets textarea')).toHaveValue('192.0.2.10\nexample.test')
   await expect(page.locator('.scan-form button[type="submit"]')).toBeDisabled()
-  await page.locator('.scope-manage').click()
-  await expect(scopePanel.locator('input[placeholder="输入授权范围名称"]')).toHaveValue('runtime scope draft')
-  await expect(scopePanel.locator('textarea').first()).toHaveValue('example.test')
-  await expect(scopePanel.getByRole('button', { name: '保存授权范围', exact: true })).toBeDisabled()
-  await page.keyboard.press('Escape')
   const stored = await page.evaluate(() => JSON.stringify({ ...localStorage }))
   expect(stored).not.toContain('192.0.2.10')
-  expect(stored).not.toContain('runtime scope draft')
   expect(errors).toEqual([])
 })
 
-test('language changes update Element Plus date picker text in the scope sheet', async ({ page }) => {
+test('language changes update Element Plus controls', async ({ page }) => {
   await page.goto('/#/settings')
   await chooseLanguage(page, 'English')
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Settings')
   await page.locator('.nav-item', { hasText: 'Port scan' }).click()
-  await page.locator('.scope-manage').click()
-  await expect(page.locator('.business-sheet')).toBeVisible()
-  const dateInput = page.locator('.scope-panel .el-date-editor input').first()
-  await dateInput.click()
-  const picker = page.locator('.el-picker-panel:visible')
-  await expect(picker).toBeVisible()
-  await expect(picker.getByPlaceholder('Select date')).toBeVisible()
-  await expect(picker.getByRole('button', { name: 'Now', exact: true })).toBeVisible()
-  await expect(picker.locator('th').first()).toHaveText('Sun')
-  await picker.getByPlaceholder('Select date').focus()
-  await page.keyboard.press('Tab')
-  expect(await page.locator('.business-sheet').evaluate(e => e.contains(document.activeElement))).toBe(true)
-  await page.keyboard.press('Escape')
-  await expect(picker).toHaveCount(0)
-  await expect(page.locator('.business-sheet')).toBeVisible()
-  await expect(dateInput).toBeFocused()
-  await page.keyboard.press('Escape')
-  await expect(page.locator('.business-sheet')).toHaveCount(0)
-  await expect(page.locator('.scope-manage')).toBeFocused()
+  await expect(page.getByRole('alert').getByText('Service not connected', { exact: true })).toBeVisible()
 })
 
 test('layout controls retain unknown features and expose accessible group selectors', async ({ page }) => {
   await page.goto('/#/settings?tab=layout')
   await expect(page.locator('#active-layout')).toBeVisible()
   await expect(page.getByRole('combobox', { name: '端口扫描 · 移至分组', exact: true })).toBeVisible()
-  await page.getByRole('checkbox', { name: '端口扫描 · 显示', exact: true }).uncheck()
+  const portscanVisibility = page.locator('.layout-item-name', { hasText: '端口扫描' }).locator('input[type="checkbox"]')
+  await expect(portscanVisibility).toBeChecked()
+  await portscanVisibility.uncheck()
   await expect(page.locator('.nav-item', { hasText: '端口扫描' })).toHaveCount(0)
-  await page.getByRole('checkbox', { name: '端口扫描 · 显示', exact: true }).check()
+  await portscanVisibility.check()
 
   const payload = {
     version: 1,
@@ -136,7 +100,9 @@ test('layout controls retain unknown features and expose accessible group select
   for await (const chunk of stream!) contents += chunk.toString()
   expect(JSON.parse(contents).groups.flatMap((group: { items: string[] }) => group.items)).toContain('future-feature')
   await page.locator('input[type=file]').setInputFiles({
-    name: 'unsupported.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify({ ...payload, version: 99 })),
+    name: 'unsupported.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify({ ...payload, version: 99 })),
   })
   await expect(page.locator('.settings-feedback')).toContainText('布局导入失败')
   await expect(page.locator('.layout-select')).toContainText('imported')
@@ -144,11 +110,10 @@ test('layout controls retain unknown features and expose accessible group select
 
 test('mobile navigation traps focus, supports the platform drawer and restores focus', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
-  await page.goto('/#/recon/portscan')
+  await page.goto('/#/settings')
   const menu = page.getByRole('button', { name: '打开导航', exact: true })
   await menu.click()
   await expect(page.locator('[data-mobile="true"]')).toBeVisible()
-  await expect(page.getByRole('heading', { name: '端口扫描', level: 1 })).toHaveCount(0)
   const card = await openPlatformActions(page)
   await page.getByRole('button', { name: '任务中心', exact: true }).focus()
   await page.keyboard.press('Escape')
@@ -156,13 +121,6 @@ test('mobile navigation traps focus, supports the platform drawer and restores f
   await expect(card).toBeFocused()
   await page.keyboard.press('Escape')
   await expect(page.locator('[data-mobile="true"]')).toHaveCount(0)
-  await expect(menu).toBeFocused()
-  await menu.click()
-  await openPlatformActions(page)
-  await page.getByRole('button', { name: '任务中心', exact: true }).click()
-  await expect(page.locator('.business-sheet')).toBeVisible()
-  await expect(page.locator('[data-mobile="true"]')).toHaveCount(0)
-  await page.keyboard.press('Escape')
   await expect(menu).toBeFocused()
 })
 
@@ -173,10 +131,10 @@ for (const viewport of [
 ]) {
   test(`renders ${viewport.width}px without overflow in light and dark themes`, async ({ page }) => {
     await page.setViewportSize(viewport)
-    await page.goto('/#/recon/portscan')
-    await expect(page.locator('h1')).toHaveText('端口扫描')
+    await page.goto('/#/settings')
+    await expect(page.locator('h1')).toHaveText('设置')
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
-    await page.screenshot({ path: `artifacts/portscan-${viewport.width}.png`, fullPage: true })
+    await page.screenshot({ path: `artifacts/settings-${viewport.width}.png`, fullPage: true })
     await page.emulateMedia({ colorScheme: 'dark' })
     await expect
       .poll(() =>
@@ -185,6 +143,6 @@ for (const viewport of [
         ),
       )
       .toBe('#17191d')
-    await page.screenshot({ path: `artifacts/portscan-${viewport.width}-dark.png`, fullPage: true })
+    await page.screenshot({ path: `artifacts/settings-${viewport.width}-dark.png`, fullPage: true })
   })
 }

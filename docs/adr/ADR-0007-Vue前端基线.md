@@ -8,7 +8,7 @@
 
 ## 背景
 
-仓库已经是 Vue 3 + TypeScript + Vite + Wails 绑定模板；产品需要路由化工作台、可配置导航、全局浮层和多语言。
+仓库已经是 Vue 3 + TypeScript + Vite + Wails 绑定模板；产品需要路由化界面、可配置导航、全局浮层和多语言。
 
 ## 决策
 

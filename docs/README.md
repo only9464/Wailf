@@ -48,7 +48,7 @@
 | [领域模型与持久化](architecture/domain-model-and-storage.md) | 核心对象、状态机、SQLite 和产物 | `accepted` |
 | [入口契约](architecture/entry-contracts.md) | GUI、CLI、MCP、HTTP 的边界 | `accepted` |
 | [端口扫描切片](features/port-scan.md) | 第一条端到端业务链路 | `designing` |
-| [安全与治理](security/governance.md) | 授权、审计、秘密和数据保留 | `accepted` |
+| [安全与治理](security/governance.md) | 审计、秘密和数据保留 | `accepted` |
 | [前端开发规范](development/frontend-conventions.md) | 前端目录、组件来源和语言包规则唯一来源 | `accepted` |
 | [开发与贡献](development/contributing.md) | 上手、加功能和文档流程 | `accepted` |
 | [测试与发布](development/testing-and-release.md) | 测试、构建、迁移、备份和发布 | `accepted` |
@@ -77,4 +77,4 @@
 
 ## 约定的稳定词汇
 
-`TargetScope`、`Asset`、`Job`、`Artifact`、`Session`、`SessionChannel`、`Connector`、`AuditEntry` 和 `Entry Adapter` 具有固定含义。它们的关系和状态机见 [领域模型与持久化](architecture/domain-model-and-storage.md)。
+`Asset`、`Job`、`Artifact`、`Session`、`SessionChannel`、`Connector`、`AuditEntry` 和 `Entry Adapter` 具有固定含义。它们的关系和状态机见 [领域模型与持久化](architecture/domain-model-and-storage.md)。

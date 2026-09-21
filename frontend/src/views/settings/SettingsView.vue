@@ -14,13 +14,13 @@ import {
   ElSwitch,
 } from 'element-plus'
 import type { InputInstance } from 'element-plus'
-import UiIcon from '../components/UiIcon.vue'
-import { featureById } from '../features/registry'
-import { useLayoutStore } from '../stores/layout'
-import { usePreferenceStore, type Language } from '../stores/preferences'
-import { useNotificationStore } from '../stores/notifications'
-import { UNASSIGNED_GROUP, type Layout, type LayoutGroup } from '../storage/layout'
-import { themeState, selectTheme, importThemes, exportThemes, removeTheme } from '../theme'
+import UiIcon from '../../components/UiIcon.vue'
+import { featureById } from '../../features/registry'
+import { useLayoutStore } from '../../stores/layout'
+import { usePreferenceStore, type Language } from '../../stores/preferences'
+import { useNotificationStore } from '../../stores/notifications'
+import { UNASSIGNED_GROUP, type Layout, type LayoutGroup } from '../../storage/layout'
+import { themeState, selectTheme, importThemes, exportThemes, removeTheme } from '../../theme'
 
 const { t, te } = useI18n()
 const route = useRoute()

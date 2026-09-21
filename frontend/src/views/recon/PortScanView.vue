@@ -1,28 +1,21 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { ElAlert, ElButton, ElCheckbox, ElForm, ElFormItem, ElInput, ElOption, ElSelect } from 'element-plus'
-import { useScopeStore } from '../stores/scopes'
-import { useJobsStore } from '../stores/jobs'
-import QueryFeedback from '../components/business/QueryFeedback.vue'
-import ResultViews from '../components/business/ResultViews.vue'
-import UiIcon from '../components/UiIcon.vue'
+import { ElAlert, ElButton, ElForm, ElFormItem, ElInput, ElOption, ElSelect } from 'element-plus'
+import { useJobsStore } from '../../stores/jobs'
+import QueryFeedback from '../../components/business/QueryFeedback.vue'
+import ResultViews from '../../components/business/ResultViews.vue'
+import UiIcon from '../../components/UiIcon.vue'
 const { t, te } = useI18n()
-const scope = useScopeStore()
 const jobs = useJobsStore()
-const emit = defineEmits<{ scope: [] }>()
 const blockedReason = computed(() =>
   !jobs.scanAvailable
     ? 'business.state.unavailableDescription'
-    : !scope.currentScope
-      ? 'business.scan.scopeRequired'
-      : !jobs.scopeUsable
-        ? 'business.scan.scopeRequired'
-        : !jobs.activeConnector || jobs.activeConnector.status !== 'healthy'
-          ? 'business.scan.connectorRequired'
-          : !jobs.canSubmit
-            ? 'business.scan.completeForm'
-            : '',
+    : !jobs.activeConnector || jobs.activeConnector.status !== 'healthy'
+      ? 'business.scan.connectorRequired'
+      : !jobs.canSubmit
+        ? 'business.scan.completeForm'
+        : '',
 )
 onMounted(() => jobs.initialize())
 function selectedJob(id: string | number | boolean | undefined) {
@@ -41,21 +34,6 @@ function selectedJob(id: string | number | boolean | undefined) {
       </div>
       <span class="badge">{{ t('business.scan.risk') }}</span>
     </header>
-    <div class="scope-strip toolbar">
-      <ElSelect
-        :model-value="scope.scopeId"
-        :aria-label="t('business.scope.scope')"
-        :placeholder="t('business.scope.chooseScope')"
-        :disabled="scope.scopes.status !== 'ready'"
-        @update:model-value="scope.select(String($event ?? ''))"
-        ><ElOption
-          v-for="item in scope.options"
-          :key="item.id"
-          :value="item.id"
-          :label="item.name"
-          :disabled="item.status !== 'active'" /></ElSelect
-      ><ElButton class="scope-manage" text @click="emit('scope')">{{ t('business.scope.manage') }}</ElButton>
-    </div>
     <ElAlert
       v-if="!jobs.scanAvailable"
       :title="t('business.state.unavailable')"
@@ -163,45 +141,18 @@ function selectedJob(id: string | number | boolean | undefined) {
           </div>
         </div>
       </section>
-      <section class="card scan-confirmation">
-        <header class="card-header">
-          <div class="toolbar">
-            <span class="step-number">3</span>
-            <div>
-              <h2>{{ t('business.scan.confirmation') }}</h2>
-              <p class="muted">{{ t('business.scan.confirmationHint') }}</p>
-            </div>
-          </div>
-        </header>
-        <div class="card-content stack">
-          <div class="form-grid">
-            <ElFormItem :label="t('business.scan.reason')"
-              ><ElInput v-model="jobs.scanDraft.reason" :placeholder="t('business.scan.reasonPlaceholder')"
-            /></ElFormItem>
-            <div class="field">
-              <span>{{ t('business.scope.scope') }}</span>
-              <p class="scope-summary">
-                {{ scope.currentScope?.authorization || t('business.scan.noAuthorization') }}
-              </p>
-            </div>
-          </div>
-          <ElCheckbox v-model="jobs.scanDraft.confirmed">{{ t('business.scan.confirmLabel') }}</ElCheckbox>
-          <div class="toolbar submit-row">
-            <span class="muted" aria-live="polite">{{
-              blockedReason ? t(blockedReason) : t('business.scan.ready')
-            }}</span
-            ><ElButton
-              type="primary"
-              native-type="submit"
-              :disabled="!jobs.canSubmit"
-              :title="blockedReason ? t(blockedReason) : ''"
-              ><UiIcon name="play" :size="16" />{{
-                t(jobs.submitting ? 'business.scan.submitting' : 'business.scan.start')
-              }}</ElButton
-            >
-          </div>
-        </div>
-      </section>
+      <div class="toolbar submit-row">
+        <span class="muted" aria-live="polite">{{ blockedReason ? t(blockedReason) : t('business.scan.ready') }}</span
+        ><ElButton
+          type="primary"
+          native-type="submit"
+          :disabled="!jobs.canSubmit"
+          :title="blockedReason ? t(blockedReason) : ''"
+          ><UiIcon name="play" :size="16" />{{
+            t(jobs.submitting ? 'business.scan.submitting' : 'business.scan.start')
+          }}</ElButton
+        >
+      </div>
     </ElForm>
     <ElAlert
       v-if="jobs.commandError"

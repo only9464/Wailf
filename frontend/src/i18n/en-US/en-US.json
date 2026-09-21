@@ -1,8 +1,7 @@
 {
   "app": {
     "name": "Wailf",
-    "subtitle": "Security workbench",
-    "noScope": "No authorized scope",
+    "subtitle": "Security operations",
     "search": "Search features…",
     "navigation": "FEATURES",
     "tasks": "Tasks",
@@ -16,10 +15,8 @@
     "expand": "Expand sidebar",
     "menu": "Open navigation",
     "noSearch": "No matching features",
-    "scope": "Authorized scope",
     "serviceStatus": "Service status",
-    "footerHint": "Active operations require a valid target scope",
-    "scopeDescription": "Manage global target scopes",
+    "footerHint": "Choose a feature and configure its options to begin",
     "platformCard": "Runtime platform",
     "platformActions": "Toggle bottom actions"
   },
@@ -76,7 +73,7 @@
   "planned": {
     "eyebrow": "FEATURE ROADMAP",
     "title": "This feature is planned",
-    "description": "This entry is part of the workbench navigation. Configure and use it here when it becomes available.",
+    "description": "This entry is part of the feature navigation. Configure and use it here when it becomes available.",
     "status": "Current stage",
     "tags": "Use cases",
     "back": "Open port scan",
@@ -84,14 +81,14 @@
     "note": "You can hide, reorder or move this feature to another group in Settings."
   },
   "settings": {
-    "eyebrow": "WORKBENCH PREFERENCES",
+    "eyebrow": "INTERFACE PREFERENCES",
     "title": "Settings",
-    "description": "Make this workbench your own. Preferences are saved on this device.",
+    "description": "Adjust the interface and navigation. Preferences are saved on this device.",
     "general": "General",
     "appearance": "Appearance",
     "layout": "Navigation",
     "language": "Interface language",
-    "languageHint": "Changes apply immediately across the workbench.",
+    "languageHint": "Changes apply immediately across the application.",
     "sidebar": "Sidebar width",
     "sidebarHint": "Choose a comfortable width. Narrow windows use a navigation drawer.",
     "collapsed": "Collapse sidebar",
@@ -144,7 +141,7 @@
     "preferenceFailed": "Preferences could not be saved. This change was not persisted.",
     "fileReadFailed": "Unable to read the file. Choose a valid JSON file.",
     "diagnostics": "Diagnostics",
-    "lightPreview": "A clear, organized workbench",
+    "lightPreview": "A clear, organized interface",
     "previewCaption": "Platform styling · Follows system appearance",
     "editingGroup": "Edit group",
     "deleteGroupHint": "Features will be kept in Unassigned when their group is deleted.",
@@ -200,15 +197,15 @@
   "screen": {
     "portscan": {
       "title": "Port scan",
-      "description": "Configure port scans for authorized targets and review jobs and asset results."
+      "description": "Configure port scans for targets and review jobs and asset results."
     },
     "service-identification": {
       "title": "Service identification",
-      "description": "Identify service types, protocols and versions on authorized assets."
+      "description": "Identify service types, protocols and versions on assets."
     },
     "subdomain": {
       "title": "Subdomain discovery",
-      "description": "Discover and organize subdomains within the target scope."
+      "description": "Discover and organize subdomains for a target."
     },
     "dns-whois": {
       "title": "DNS / Whois",
@@ -216,7 +213,7 @@
     },
     "liveness": {
       "title": "Liveness discovery",
-      "description": "Review reachability and liveness of authorized targets."
+      "description": "Review reachability and liveness of targets."
     },
     "osint": {
       "title": "Open-source intelligence",
@@ -240,7 +237,7 @@
     },
     "poc-scan": {
       "title": "POC validation",
-      "description": "Organize vulnerability validation and findings within authorized scope."
+      "description": "Organize vulnerability validation and findings."
     },
     "nuclei": {
       "title": "Nuclei connector",
@@ -256,15 +253,15 @@
     },
     "directory-scan": {
       "title": "Directory discovery",
-      "description": "Assess web paths and exposed surfaces within authorized scope."
+      "description": "Assess web paths and exposed surfaces."
     },
-    "unauthorized-check": {
+    "access-control-check": {
       "title": "Access control checks",
       "description": "Check for missing access controls and record verification evidence."
     },
     "weak-credential": {
       "title": "Weak credential assessment",
-      "description": "Manage authorized authentication strength checks and risk records."
+      "description": "Manage authentication strength checks and risk records."
     },
     "hash-analysis": {
       "title": "Hash analysis",
@@ -280,11 +277,11 @@
     },
     "exploit-connector": {
       "title": "Exploit framework connector",
-      "description": "Connect external validation frameworks with authorization checks and auditing."
+      "description": "Connect external validation frameworks with checks and auditing."
     },
     "web-validation": {
       "title": "Web validation",
-      "description": "Manage authorized web risk validation and evidence."
+      "description": "Manage web risk validation and evidence."
     },
     "local-privesc": {
       "title": "Local privilege assessment",
@@ -292,11 +289,11 @@
     },
     "container-escape": {
       "title": "Container isolation validation",
-      "description": "Assess isolation boundaries and risks in authorized container environments."
+      "description": "Assess isolation boundaries and risks in container environments."
     },
     "internal-scan": {
       "title": "Internal network discovery",
-      "description": "Review assets and reachability within authorized internal networks."
+      "description": "Review assets and reachability within internal networks."
     },
     "lateral-assessment": {
       "title": "Lateral movement assessment",
@@ -324,7 +321,7 @@
     },
     "persistence-review": {
       "title": "Persistence review",
-      "description": "Record persistence risks and audit evidence in authorized environments."
+      "description": "Record persistence risks and audit evidence in environments."
     },
     "webshell-connector": {
       "title": "WebShell connectors",
@@ -336,7 +333,7 @@
     },
     "session-files": {
       "title": "Session files",
-      "description": "Review authorized file channels supplied by external connectors."
+      "description": "Review file channels supplied by external connectors."
     },
     "cloud-discovery": {
       "title": "Cloud asset discovery",
@@ -376,7 +373,7 @@
     },
     "proxy-tunnel": {
       "title": "Proxies & tunnels",
-      "description": "Manage proxy and tunnel configuration for authorized connections."
+      "description": "Manage proxy and tunnel configuration for connections."
     },
     "text-tools": {
       "title": "Text tools",
@@ -431,16 +428,16 @@
     "scan": {
       "eyebrow": "Reconnaissance / Network discovery",
       "title": "Port scan",
-      "subtitle": "Discover host ports and services within an authorized scope, with traceable results.",
+      "subtitle": "Discover host ports and services with traceable results.",
       "risk": "L2 · Active discovery",
-      "unavailableNote": "Prepare targets and confirmation details now. Once connected, choose a scan profile and Connector to submit a job.",
+      "unavailableNote": "Prepare targets now. Once connected, choose a scan profile and Connector to submit a job.",
       "targets": "Scan targets",
       "targetHint": "Enter target expressions or reference existing assets.",
       "manual": "Target input",
       "existing": "Existing assets",
       "expressions": "Hosts, domains, or CIDRs",
       "targetPlaceholder": "Enter one target per line",
-      "targetFormat": "Separate targets with new lines or commas. The service validates targets against the selected scope.",
+      "targetFormat": "Separate targets with new lines or commas. The service validates targets when submitted.",
       "assetIds": "Asset IDs",
       "assetPlaceholder": "Enter one existing asset ID per line",
       "assetHint": "Reference existing global assets; the service validates their eligibility.",
@@ -452,17 +449,10 @@
       "profile": "Scan profile",
       "chooseProfile": "Choose a scan profile",
       "connectorVersion": "Connector version {version}",
-      "confirmation": "Authorization confirmation",
-      "confirmationHint": "Each scan is linked to a target scope and a confirmation reason.",
-      "reason": "Reason for this operation",
-      "reasonPlaceholder": "Assessment purpose or ticket reference",
-      "noAuthorization": "Select a target scope to view authorization details",
-      "confirmLabel": "I confirm these targets are within the selected authorized scope and agree to run the selected scan profile.",
       "start": "Submit scan job",
       "submitting": "Submitting…",
-      "scopeRequired": "Select a currently valid target scope.",
       "connectorRequired": "Select a healthy, available Connector.",
-      "completeForm": "Enter targets, choose a scan profile, and confirm authorization.",
+      "completeForm": "Enter targets and choose a scan profile.",
       "ready": "The service will validate the request again.",
       "submitted": "Job submitted. Status and results are queried from the service.",
       "relatedJob": "Related job",
@@ -543,30 +533,6 @@
       "noSnapshot": "No result snapshot yet",
       "exportAssets": "Export assets",
       "exported": "Export completed."
-    },
-    "scope": {
-      "scope": "Target scope",
-      "noScope": "No scope selected",
-      "manage": "Manage target scopes",
-      "description": "Target scopes define permitted targets, operations and validity. Business records can be queried globally.",
-      "chooseScope": "Choose a target scope",
-      "newScope": "New target scope",
-      "name": "Name",
-      "scopeName": "Target scope name",
-      "saveScope": "Save target scope",
-      "expressions": "Target expressions",
-      "authorization": "Authorization",
-      "authorizationPlaceholder": "Authorization details or ticket reference",
-      "validFrom": "Valid from",
-      "expires": "Expires at",
-      "riskLevel": "Allowed risk level",
-      "operations": "Allowed operations",
-      "timeHint": "Enter local times. They are converted to UTC when saved.",
-      "scopeHint": "Separate operation categories with commas. The service validates targets and operation levels.",
-      "scopeRequirements": "Enter a name, targets, authorization, operations and valid dates.",
-      "draftHint": "Form drafts are kept for this session only.",
-      "unavailableHint": "Saving is unavailable until the service is connected. You can prepare a draft, which is kept for this session only.",
-      "invalidDraft": "Enter a name, targets, authorization, allowed operations, and valid start and end times."
     }
   }
 }
